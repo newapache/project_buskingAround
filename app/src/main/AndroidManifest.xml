@@ -6,10 +6,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+
 
     <application
         android:allowBackup="true"
@@ -18,12 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="io.antmedia.android.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name="io.antmedia.android.LiveMainActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity android:name="io.antmedia.android.liveVideoBroadcaster.LiveVideoBroadcasterActivity"
@@ -33,6 +37,22 @@
             android:theme="@style/AppThemeDark"/>
 
         <service android:name="io.antmedia.android.broadcaster.LiveVideoBroadcaster" />
+
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.BuskingMap" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.FilterActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.MypageActivity"></activity>
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBxHFzHSgcyz2caATOX5kmciM-ovzZmbUM" />
     </application>
 
 </manifest>

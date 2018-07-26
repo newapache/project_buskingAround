@@ -38,7 +38,7 @@ import io.antmedia.android.broadcaster.ILiveVideoBroadcaster;
 import io.antmedia.android.broadcaster.LiveVideoBroadcaster;
 import io.antmedia.android.broadcaster.utils.Resolution;
 
-import static io.antmedia.android.MainActivity.RTMP_BASE_URL;
+import static io.antmedia.android.LiveMainActivity.RTMP_BASE_URL;
 
 public class LiveVideoBroadcasterActivity extends AppCompatActivity {
 
@@ -93,7 +93,7 @@ public class LiveVideoBroadcasterActivity extends AppCompatActivity {
         //this makes service do its job until done
         startService(mLiveVideoBroadcasterServiceIntent);
 
-        setContentView(R.layout.activity_live_video_broadcaster);
+        setContentView(R.layout.live_video_broadcaster);
 
         mTimerHandler = new TimerHandler();
         mStreamNameEditText = (EditText) findViewById(R.id.stream_name_edit_text);

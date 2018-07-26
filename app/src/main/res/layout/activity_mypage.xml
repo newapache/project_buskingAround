@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MypageActivity">
+    tools:context="finalreport.mobile.dduwcom.myapplication.MypageActivity">
 
 
     <android.support.v7.widget.Toolbar
@@ -58,12 +58,15 @@
             android:orientation="vertical"
             android:layout_gravity="center">
             <Button
+                android:onClick="onAir"
                 android:id="@+id/goBroadcast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="방송하기"
                 />
             <Button
+                android:onClick="onAir"
+                android:id="@+id/watchBroadcast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="on air"

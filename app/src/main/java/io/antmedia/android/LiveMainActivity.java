@@ -8,12 +8,12 @@ import android.view.View;
 import io.antmedia.android.liveVideoBroadcaster.*;
 import io.antmedia.android.liveVideoPlayer.LiveVideoPlayerActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class LiveMainActivity extends AppCompatActivity {
 
     /**
      * PLEASE WRITE RTMP BASE URL of the your RTMP SERVER.
      */
-    public static final String RTMP_BASE_URL = "rtmp://52.220.103.225/LiveApp/";
+public static final String RTMP_BASE_URL = "rtmp://52.220.103.225/LiveApp/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

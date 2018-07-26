@@ -71,7 +71,7 @@ public class CameraResolutionsFragment extends DialogFragment implements Adapter
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         restoreState(savedInstanceState);
-        View v = inflater.inflate(R.layout.layout_camera_resolutions, container, false);
+        View v = inflater.inflate(R.layout.live_layout_camera_resolutions, container, false);
 
         mCameraResolutionsListView = (ListView) v.findViewById(R.id.camera_resolutions_listview);
         mCameraResolutionsListView.setAdapter(mresolutionAdapter);
