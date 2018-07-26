@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/share" android:title="공유" android:icon="@drawable/ic_launcher_background"/>
+    <item android:id="@+id/upload" android:title="업로드" android:icon="@drawable/ic_launcher_background"/>
+    <item android:id="@+id/call" android:title="call" android:icon="@drawable/ic_launcher_background"/>
+    <group android:id="@+id/helpgroup">
+        <item android:id="@+id/help" android:title="help" android:icon="@drawable/ic_launcher_background"/>
+    </group>
+
+
+</menu>

@@ -1,29 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context="io.antmedia.android.MainActivity">
+    tools:context="finalreport.mobile.dduwcom.myapplication.MainActivity"
+    android:orientation="vertical">
 
-    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LIVE VIDEO BROADCASTER"
-        android:onClick="openVideoBroadcaster"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"/>
+        android:background="#A593E0">
+
+        <TextView
+
+            android:textColor="#FFFFF3"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:typeface="serif"
+            android:text="buskingAround"
+            />
+        <ImageButton
+            android:onClick="onclick"
+            android:id="@+id/gomypage"
+            android:background="@android:color/transparent"
+            android:src="@drawable/mypage_icon"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/busking_map"
+            android:onClick="onclick"
+            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="80dp" />
+        <ImageButton
+            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="80dp" />
+        <ImageButton
+            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="80dp" />
+
+    </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LIVE VIDEO PLAYER"
-        android:onClick="openVideoPlayer"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"/>
+        android:text="추천 버스킹"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="위치 기반"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/horizon_list1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋아요 기반"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/horizon_list2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선호도 기반"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/horizon_list3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>
