@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class Fragment1 extends Fragment {
-    private RecyclerView mVerticalView;
-    private VerticalAdapter mAdapter;
+
+    private RecyclerView mCardview;
+    private CardviewAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
     private int MAX_ITEM_COUNT = 50;
@@ -31,8 +32,8 @@ public class Fragment1 extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_fragment1, container, false);
 
+        mCardview = (RecyclerView)view.findViewById(R.id.cardview_list);
 
-        mVerticalView = (RecyclerView)view.findViewById(R.id.vertical_list);
         ArrayList<BuskingData> data = new ArrayList<>();
 
         int i = 0;
@@ -41,12 +42,10 @@ public class Fragment1 extends Fragment {
             i++;
         }
         mLayoutManager = new LinearLayoutManager(getContext());
-        mVerticalView.setLayoutManager(mLayoutManager);
-        mAdapter = new VerticalAdapter();
+        mCardview.setLayoutManager(mLayoutManager);
+        mAdapter = new CardviewAdapter();
         mAdapter.setData(data);
-        mVerticalView.setAdapter(mAdapter);
-
-
+        mCardview.setAdapter(mAdapter);
 
 
         return view;

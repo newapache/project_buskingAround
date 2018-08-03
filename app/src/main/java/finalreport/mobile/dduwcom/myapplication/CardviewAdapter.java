@@ -9,42 +9,39 @@ import java.util.ArrayList;
 
 import io.antmedia.android.liveVideoBroadcaster.R;
 
-/**
- * Created by kohheekyung on 2018. 6. 27..
- */
-
-public class VerticalAdapter extends RecyclerView.Adapter<VerticalViewHolder> {
-    private ArrayList<BuskingData> verticalData;
+public class CardviewAdapter extends RecyclerView.Adapter<CardviewViewHolder> {
+    private ArrayList<BuskingData> cardviewData;
 
     public void setData(ArrayList<BuskingData> list){
-        verticalData = list;
+        cardviewData = list;
     }
 
     @Override
-    public VerticalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CardviewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 // 사용할 아이템의 뷰를 생성해준다.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vertical_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item, parent, false);
 
-        VerticalViewHolder holder = new VerticalViewHolder(view);
+        CardviewViewHolder holder = new CardviewViewHolder(view);
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(VerticalViewHolder holder, int position) {
-        BuskingData data = verticalData.get(position);
+    public void onBindViewHolder(CardviewViewHolder holder, int position) {
+        BuskingData data = cardviewData.get(position);
 
         holder.title.setText(data.getTitle());
         holder.genre.setText(data.getGenre());
         holder.time.setText(data.getTime());
         holder.location.setText(data.getLocation());
         holder.icon.setImageResource(data.getImg());
+
     }
 
     @Override
     public int getItemCount() {
-        return verticalData.size();
+        return cardviewData.size();
     }
 
 }
