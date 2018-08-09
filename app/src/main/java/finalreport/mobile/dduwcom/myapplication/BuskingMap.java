@@ -2,39 +2,30 @@ package finalreport.mobile.dduwcom.myapplication;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.drawable.VectorDrawable;
-import android.graphics.drawable.AnimatedVectorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -64,6 +55,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
+
 
     final static int FILTER_ACTIVITY_CODE = 100;
     android.support.v7.widget.Toolbar toolbar;
@@ -148,12 +140,22 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         per4.setLatitude(37.548640); per4.setLongitude(126.913488);
         per5.setLatitude(37.548078); per5.setLongitude(126.911896);
         per6.setLatitude(37.548627); per6.setLongitude(126.911864);
+
+
     }
 
     public void filterOnclick(View v){
-        Intent intent = new Intent(this, FilterActivity.class);
-        startActivityForResult(intent, FILTER_ACTIVITY_CODE);
-
+        final BottomSheetDialog bottomDialog = new BottomSheetDialog(this);
+        View dialogLayout = getLayoutInflater().inflate(R.layout.bottom_filter, null);
+        ImageView dialogClose = dialogLayout.findViewById(R.id.dialog_close);
+        dialogClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomDialog.dismiss();
+            }
+        });
+        bottomDialog.setContentView(dialogLayout);
+        bottomDialog.show();
     }
 
     @Override
@@ -690,5 +692,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
                 break;
         }
     }
+
+
 
 }

@@ -1,9 +1,9 @@
 package finalreport.mobile.dduwcom.myapplication;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,15 +20,17 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button bt_tab1, bt_tab2, bt_tab3;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
         // 위젯에 대한 참조
-        bt_tab1 = (Button)findViewById(R.id.bt_tab1);
+    bt_tab1 = (Button)findViewById(R.id.bt_tab1);
         bt_tab2 = (Button)findViewById(R.id.bt_tab2);
         bt_tab3 = (Button)findViewById(R.id.bt_tab3);
+
 
         // 탭 버튼에 대한 리스너 연결
         bt_tab1.setOnClickListener(this);
@@ -51,7 +53,7 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.bt_tab3 :
-                // '버튼2' 클릭 시 '프래그먼트2' 호출
+                // '버튼3' 클릭 시 '프래그먼트3' 호출
                 callFragment(FRAGMENT3);
                 break;
         }
@@ -66,6 +68,10 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.watchBroadcast:
                 Intent intent2 =  new Intent(this,  LiveVideoPlayerActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.ic_add_post :
+                Intent intent3 = new Intent(this, MakePost.class);
+                startActivity(intent3);
                 break;
         }
     }

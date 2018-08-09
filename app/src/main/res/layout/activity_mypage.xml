@@ -74,6 +74,14 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/ic_add_post"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onAir"
+            android:src="@drawable/ic_add_post" />
+
     </LinearLayout>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_container"
