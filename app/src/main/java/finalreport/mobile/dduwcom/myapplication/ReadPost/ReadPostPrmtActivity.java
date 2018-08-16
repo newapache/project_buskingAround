@@ -1,4 +1,4 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.ReadPost;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +14,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
 import io.antmedia.android.liveVideoBroadcaster.R;
+
 
 public class ReadPostPrmtActivity extends AppCompatActivity {
 
     ListView lv;
+    ArrayList<String> list_postPrmt = new ArrayList<String>();
     DatabaseReference ref;
 
     @Override
@@ -29,8 +32,8 @@ public class ReadPostPrmtActivity extends AppCompatActivity {
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         ref = db.getReference("/"); /////////////////////////////////fuckinghere!!!!!!
-        final ArrayList<String> list_postPrmt = new ArrayList<String>();
-        list_postPrmt.add("aaaa");
+
+        list_postPrmt.add("bbb");
 
         ref.addChildEventListener(new ChildEventListener() {
             @Override

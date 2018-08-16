@@ -1,4 +1,4 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.Map;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -49,6 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,

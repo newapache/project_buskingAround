@@ -1,4 +1,4 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.Models;
 
 /**
  * Created by kohheekyung on 2018. 6. 27..

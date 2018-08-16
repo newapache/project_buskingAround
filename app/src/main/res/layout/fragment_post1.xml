@@ -13,6 +13,13 @@ android:orientation="vertical">
         android:layout_height="0dp"
         class="com.google.android.gms.maps.MapFragment" />
 
+    <ImageView
+        android:src="@drawable/chat"
+        android:id="@+id/postfragment1_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="50dp"/>
+
 <EditText
     android:id="@+id/et_title"
     android:layout_width="match_parent"
@@ -37,13 +44,28 @@ android:orientation="vertical">
     android:inputType="textPersonName"
     android:text="postPrmt_bTitle" />
 
+    <EditText
+        android:id="@+id/et_bLat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="postPrmt_busking_Latitude" />
 
 
-<Button
-    android:id="@+id/btnCreatePost"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="CreatePost" />
+    <EditText
+        android:id="@+id/et_bLon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="postPrmt_busking_longitude" />
+
+    <Button
+        android:id="@+id/btnCreatePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CreatePost" />
 
 
 </LinearLayout>

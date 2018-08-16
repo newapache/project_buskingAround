@@ -1,6 +1,7 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.CreatePost;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,11 +18,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
+import finalreport.mobile.dduwcom.myapplication.ReadPost.ReadPostPrmtActivity;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 
 public class PostFragment1 extends Fragment{
-
+    private static final int PICK_FROM_ALBUM = 10;
     private DatabaseReference ref;
 
     private EditText et_title;
@@ -28,6 +32,8 @@ public class PostFragment1 extends Fragment{
     private EditText et_bTitle;
     private EditText et_bLat;
     private EditText et_bLon;
+    private ImageView iv_postImage;
+    private Uri imageUri;
 
     private Button btnCreatePost;
     private Button btnReadPost;
@@ -66,11 +72,11 @@ public class PostFragment1 extends Fragment{
         et_title = (EditText) view.findViewById(R.id.et_title);
         et_content = (EditText) view.findViewById(R.id.et_content);
         et_bTitle = (EditText) view.findViewById(R.id.et_bTitle);
-        et_bLat = (EditText) view.findViewById(R.id.et_bLat);
-        et_bLon = (EditText) view.findViewById(R.id.et_bLon);
+        et_bLat = (EditText)view.findViewById(R.id.et_bLat);
+        et_bLon = (EditText)view.findViewById(R.id.et_bLon);
+        iv_postImage = (ImageView)view.findViewById(R.id.postfragment1_image);
 
         btnCreatePost = (Button) view.findViewById(R.id.btnCreatePost);
-        btnReadPost = (Button) view.findViewById(R.id.btnReadPost);
 
         btnCreatePost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +91,8 @@ public class PostFragment1 extends Fragment{
         });
 
 
+
+
         return view;
 
     }
@@ -95,6 +103,9 @@ public class PostFragment1 extends Fragment{
         PostPromote postPrmt = new PostPromote(postPrmt_title, postPrmt_content, postPrmt_busking_title, postPrmt_busking_latitude, postPrmt_busking_longitude);
         ref.child("post_promote").push().setValue(postPrmt);
     }
+
+
+
 }
 
 

@@ -1,4 +1,4 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.CreatePost;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;

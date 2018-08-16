@@ -1,4 +1,4 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.Map;
 
 import android.content.Intent;
 import android.graphics.Color;

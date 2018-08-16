@@ -1,19 +1,18 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.Main;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import finalreport.mobile.dduwcom.myapplication.Map.BuskingMap;
+import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
+import finalreport.mobile.dduwcom.myapplication.Mypage.MypageActivity;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class MainActivity extends AppCompatActivity {

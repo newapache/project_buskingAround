@@ -1,4 +1,4 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.Map;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import finalreport.mobile.dduwcom.myapplication.Map.VerticalViewHolder;
+import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 /**

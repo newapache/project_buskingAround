@@ -1,4 +1,4 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.Mypage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class Fragment1 extends Fragment {

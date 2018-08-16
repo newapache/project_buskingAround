@@ -17,7 +17,7 @@
     <string name="microphone_permission_is_required">Microphone permission is required to run this app</string>
     <string name="permission">Permission</string>
     <string name="app_doesnot_work_without_permissions">App does not work without permissions. Please give Camera and Record Audio permission on app settings</string>
-
+    <string name="rc_color">splash_background</string>
 
     <string name="video">Video</string>
 

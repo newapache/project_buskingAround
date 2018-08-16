@@ -1,4 +1,4 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.Main;
 
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;

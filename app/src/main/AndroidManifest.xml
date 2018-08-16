@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -38,11 +39,13 @@
         <service android:name="io.antmedia.android.broadcaster.LiveVideoBroadcaster" />
 
         <activity android:name="finalreport.mobile.dduwcom.myapplication.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name="finalreport.mobile.dduwcom.myapplication.BuskingMap" />
         <activity android:name="finalreport.mobile.dduwcom.myapplication.FilterActivity" />
@@ -54,7 +57,18 @@
 
         <activity android:name="finalreport.mobile.dduwcom.myapplication.MyFeed" />
         <activity android:name="finalreport.mobile.dduwcom.myapplication.MakePost" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.ReadPostPrmtActivity"></activity>
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.ReadPostPrmtActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.LoginActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.SignupActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.NormPostItem" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.NormPostDetailActivity" />
     </application>
 
 </manifest>

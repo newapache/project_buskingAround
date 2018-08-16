@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="finalreport.mobile.dduwcom.myapplication.ReadPostPrmtActivity">
+    tools:context="finalreport.mobile.dduwcom.myapplication.ReadPost.ReadPostPrmtActivity">
 
 <ListView
     android:id="@+id/lv_postPrmt"

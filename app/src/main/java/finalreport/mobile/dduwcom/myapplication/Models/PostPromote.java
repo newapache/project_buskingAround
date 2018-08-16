@@ -1,14 +1,15 @@
-package finalreport.mobile.dduwcom.myapplication;
+package finalreport.mobile.dduwcom.myapplication.Models;
 
 
 public class PostPromote {
 
     public String postPrmt_title;
-    public String postPrmt_content;
+public String postPrmt_content;
     public String postPrmt_busking_title;
     public String postPrmt_busking_img;
     public double postPrmt_busking_latitude;
     public double postPrmt_busking_longitude;
+
 
     public PostPromote() {
 
@@ -22,5 +23,6 @@ public class PostPromote {
         this.postPrmt_busking_title = postPrmt_busking_title;
         this.postPrmt_busking_latitude = postPrmt_busking_latitude;
         this.postPrmt_busking_longitude = postPrmt_busking_longitude;
+
     }
 }
