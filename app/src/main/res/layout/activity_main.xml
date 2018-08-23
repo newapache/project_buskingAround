@@ -18,8 +18,14 @@
         android:layout_height="wrap_content"
         android:background="#A593E0">
 
-        <TextView
+        <ImageView
+            android:onClick="onclick"
+            android:id="@+id/gosearchActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_stat_search"/>
 
+        <TextView
             android:textColor="#FFFFF3"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

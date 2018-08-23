@@ -6,13 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import finalreport.mobile.dduwcom.myapplication.Map.BuskingMap;
 import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
+import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
 import finalreport.mobile.dduwcom.myapplication.Mypage.MypageActivity;
+import finalreport.mobile.dduwcom.myapplication.SearchActivity;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -100,12 +110,29 @@ public class MainActivity extends AppCompatActivity {
 
         switch(v.getId()){
             case R.id.busking_map:
-                Intent intent =  new Intent(this, BuskingMap.class);
+                final Intent intent =  new Intent(this, BuskingMap.class);
                 startActivity(intent);
                 break;
             case  R.id.gomypage:
-                Intent intent2 =  new Intent(this, MypageActivity.class);
-                startActivity(intent2);
+                final Intent intent2 = new Intent(this, MypageActivity.class);
+               FirebaseDatabase.getInstance().getReference("users")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        intent2.putExtra("user", dataSnapshot.getValue(UserModel.class));
+                        startActivity(intent2);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                break;
+            case R.id.gosearchActivity:
+                Intent intent3 =  new Intent(this, SearchActivity.class);
+                startActivity(intent3);
+                break;
 
 
         }

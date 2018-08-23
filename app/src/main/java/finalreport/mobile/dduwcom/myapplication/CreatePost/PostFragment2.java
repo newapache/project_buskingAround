@@ -107,14 +107,19 @@ public class PostFragment2 extends Fragment{
                         @SuppressWarnings("VisibleForTests")
                         String imageUrl = task.getResult().getDownloadUrl().toString();
 
+                        String path = FirebaseDatabase.getInstance().getReference().push().toString();
+                        final String postId = path.substring(path.lastIndexOf("/") + 1);
+                                ;
                         PostNormal postNormal = new PostNormal();
                         postNormal.norm_imageUrl = imageUrl;
                         postNormal.norm_title = et_title.getText().toString();
                         postNormal.norm_content = et_content.getText().toString();
                         postNormal.norm_uid = auth.getCurrentUser().getUid();
                         postNormal.norm_userId = auth.getCurrentUser().getEmail();
+                        postNormal.norm_postID = postId;
+                        postNormal.timeCreated = System.currentTimeMillis();
 
-                        ref.child("post_Normal").push().setValue(postNormal);
+                        ref.child("post_Normal").child(postId).setValue(postNormal);
 
 
                     }

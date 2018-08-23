@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import finalreport.mobile.dduwcom.myapplication.Models.PostNormal;
+import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
 import finalreport.mobile.dduwcom.myapplication.ReadPost.NormPostDetailActivity;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
@@ -44,8 +45,6 @@ public class Fragment2 extends Fragment{
     private  StaggeredGridLayoutManager mStaggeredGridLayoutManager;
 
     ArrayList<PostNormal> Normalposts = new ArrayList<>();
-
-
 
     private int MAX_ITEM_COUNT = 50;
 
@@ -65,8 +64,10 @@ public class Fragment2 extends Fragment{
         mDatabase = FirebaseDatabase.getInstance();
         mGridview = (RecyclerView)view.findViewById(R.id.gridView1);
 
+
+        UserModel user = (UserModel) getArguments().getSerializable("user");
         mReference = mDatabase.getReference("post_Normal"); // 변경값을 확인할 child 이름
-        FirebaseDatabase.getInstance().getReference("post_Normal").orderByChild("norm_userId").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("post_Normal").orderByChild("norm_userId").equalTo(user.getEmail()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

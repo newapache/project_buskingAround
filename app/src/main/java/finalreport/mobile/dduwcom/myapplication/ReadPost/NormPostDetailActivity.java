@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 
+import finalreport.mobile.dduwcom.myapplication.CommentActivity;
 import finalreport.mobile.dduwcom.myapplication.Utils.Heart;
 import finalreport.mobile.dduwcom.myapplication.Models.PostNormal;
 import finalreport.mobile.dduwcom.myapplication.Utils.SquareImageView;
@@ -56,7 +57,7 @@ public class NormPostDetailActivity extends AppCompatActivity {
 
         mHeart = new Heart(mHeartWhite, mHeartRed);
 
-        PostNormal post;
+        final PostNormal post;
 
         Intent intent = getIntent();
         post = (PostNormal)intent.getSerializableExtra("detail");
@@ -82,6 +83,16 @@ public class NormPostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onStarClicked( FirebaseDatabase.getInstance().getReference("post_Normal").child(uidKey));
+            }
+        });
+
+
+        mComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NormPostDetailActivity.this, CommentActivity.class);
+                intent.putExtra("post",post);
+                startActivity(intent);
             }
         });
 

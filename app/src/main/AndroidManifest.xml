@@ -38,7 +38,7 @@
 
         <service android:name="io.antmedia.android.broadcaster.LiveVideoBroadcaster" />
 
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.MainActivity">
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.Main.MainActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -47,20 +47,20 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.BuskingMap" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.FilterActivity" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.MypageActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.Map.BuskingMap" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.Map.FilterActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.Mypage.MypageActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBxHFzHSgcyz2caATOX5kmciM-ovzZmbUM" />
 
         <activity android:name="finalreport.mobile.dduwcom.myapplication.MyFeed" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.MakePost" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.ReadPostPrmtActivity" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.LoginActivity" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.SignupActivity" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.SplashActivity">
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.CreatePost.MakePost" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.ReadPost.ReadPostPrmtActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.Login.LoginActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.Login.SignupActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.Login.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,7 +68,9 @@
             </intent-filter>
         </activity>
         <activity android:name="finalreport.mobile.dduwcom.myapplication.NormPostItem" />
-        <activity android:name="finalreport.mobile.dduwcom.myapplication.NormPostDetailActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.ReadPost.NormPostDetailActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.CommentActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.SearchActivity"></activity>
     </application>
 
 </manifest>

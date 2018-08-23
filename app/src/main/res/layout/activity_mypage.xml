@@ -26,77 +26,109 @@
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:layout_below="@+id/toolbar"
+        android:id="@id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@id/linearLayout1">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_background"/>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/mypage_user_image"
+            android:src="@drawable/ic_launcher_background" />
+
+        <include layout="@layout/snippet_top_view_profile" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:padding="20dp"
+        android:background="@drawable/white_grey_border_bottom">
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
+            android:layout_weight="6"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
-            <TextView
-                android:id="@+id/mypage_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="이름"/>
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="냐냐"/>
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/display_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mitch"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="I live in Vancouver, BC"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
 
         </LinearLayout>
         <LinearLayout
-            android:layout_marginLeft="50dp"
-            android:layout_width="wrap_content"
+            android:layout_weight="4"
+            android:layout_toRightOf="@+id/linearLayout3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:orientation="vertical">
+
             <Button
-                android:onClick="onAir"
                 android:id="@+id/goBroadcast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="방송하기"
-                />
-            <Button
                 android:onClick="onAir"
+                android:text="방송하기"
+                android:visibility="visible" />
+
+            <Button
                 android:id="@+id/watchBroadcast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="onAir"
                 android:text="on air"
-                />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/ic_add_post"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onAir"
-            android:src="@drawable/ic_add_post" />
+                android:visibility="gone" />
 
     </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout4"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_below="@+id/linearLayout1"
-        android:id="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout3"
+        android:id="@+id/linearLayout4"
         >
 
         <Button
