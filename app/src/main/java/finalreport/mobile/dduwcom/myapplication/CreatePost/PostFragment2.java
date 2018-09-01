@@ -26,6 +26,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import finalreport.mobile.dduwcom.myapplication.Models.PostNormal;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
@@ -109,7 +113,10 @@ public class PostFragment2 extends Fragment{
 
                         String path = FirebaseDatabase.getInstance().getReference().push().toString();
                         final String postId = path.substring(path.lastIndexOf("/") + 1);
-                                ;
+                        SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy.MM.dd HH:mm:ss", Locale.KOREA );
+                        Date currentTime = new Date ( );
+                        String dTime = formatter.format ( currentTime );
+
                         PostNormal postNormal = new PostNormal();
                         postNormal.norm_imageUrl = imageUrl;
                         postNormal.norm_title = et_title.getText().toString();
@@ -117,7 +124,7 @@ public class PostFragment2 extends Fragment{
                         postNormal.norm_uid = auth.getCurrentUser().getUid();
                         postNormal.norm_userId = auth.getCurrentUser().getEmail();
                         postNormal.norm_postID = postId;
-                        postNormal.timeCreated = System.currentTimeMillis();
+                        postNormal.timeCreated = dTime;
 
                         ref.child("post_Normal").child(postId).setValue(postNormal);
 
@@ -149,9 +156,6 @@ public class PostFragment2 extends Fragment{
 
 
         }
-
-
-
     }
 
 

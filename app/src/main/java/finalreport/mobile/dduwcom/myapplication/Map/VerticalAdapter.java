@@ -5,10 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import finalreport.mobile.dduwcom.myapplication.Map.VerticalViewHolder;
 import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
+import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
+import finalreport.mobile.dduwcom.myapplication.Mypage.Fragment1;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 /**
@@ -16,16 +21,16 @@ import io.antmedia.android.liveVideoBroadcaster.R;
  */
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalViewHolder> {
-    private ArrayList<BuskingData> verticalData;
+    private ArrayList<PostPromote> verticalPostPrmt;
 
-    public void setData(ArrayList<BuskingData> list){
-        verticalData = list;
+    public void setData(ArrayList<PostPromote> list){
+        verticalPostPrmt = list;
     }
 
     @Override
     public VerticalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-// 사용할 아이템의 뷰를 생성해준다.
+        // 사용할 아이템의 뷰를 생성해준다.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vertical_item, parent, false);
 
         VerticalViewHolder holder = new VerticalViewHolder(view);
@@ -35,18 +40,17 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalViewHolder> {
 
     @Override
     public void onBindViewHolder(VerticalViewHolder holder, int position) {
-        BuskingData data = verticalData.get(position);
+        PostPromote postPrmt = verticalPostPrmt.get(position);
 
-        holder.title.setText(data.getTitle());
-        holder.genre.setText(data.getGenre());
-        holder.time.setText(data.getTime());
-        holder.location.setText(data.getLocation());
-        holder.icon.setImageResource(data.getImg());
+        holder.title.setText(postPrmt.postPrmt_busking_title);
+        /*holder.genre.setText(postPrmt.postPrmt_content);
+        holder.time.setText(postPrmt.postPrmt_content);*/
+        holder.location.setText(String.valueOf(postPrmt.postPrmt_busking_latitude) + String.valueOf(postPrmt.postPrmt_busking_longitude));
+        Glide.with(holder.icon.getContext()).load(postPrmt.getPostPrmt_imageUrl()).into(holder.icon);
     }
 
     @Override
     public int getItemCount() {
-        return verticalData.size();
+        return verticalPostPrmt.size();
     }
-
 }

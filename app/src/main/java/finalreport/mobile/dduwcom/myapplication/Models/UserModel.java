@@ -7,6 +7,8 @@ public class UserModel implements Serializable {
     public String profileImageUrl;
     public String uid;
     public String email;
+    public String description;
+
 
     public UserModel(String userName, String profileImageUrl, String uid) {
         this.userName = userName;
@@ -48,5 +50,13 @@ public class UserModel implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

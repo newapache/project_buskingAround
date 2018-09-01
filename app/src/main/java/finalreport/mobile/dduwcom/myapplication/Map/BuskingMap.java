@@ -25,7 +25,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -37,19 +39,29 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
 import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
+import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
@@ -59,15 +71,12 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
 
 
     final static int FILTER_ACTIVITY_CODE = 100;
+    private int MAX_ITEM_COUNT = 50;
     android.support.v7.widget.Toolbar toolbar;
-    private RecyclerView mVerticalView;
-    private VerticalAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
-    private boolean expanded = false;
-    private int MAX_ITEM_COUNT = 50;
+    //googlemap
 
-    //맵
     private GoogleApiClient mGoogleApiClient = null;
     private GoogleMap mGoogleMap = null;
     private Marker currentMarker = null;
@@ -81,23 +90,29 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
     private AppCompatActivity mActivity;
     boolean askPermissionOnceAgain = false;
     boolean mRequestingLocationUpdates = false;
-    Location mCurrentLocation;
     boolean mMoveMapByUser = true;
     boolean mMoveMapByAPI = true;
+
+    Location mCurrentLocation;
+    Location mBuskingLocation;
     LatLng currentPosition;
+    LatLng buskingPosition;
 
     LocationRequest locationRequest = new LocationRequest()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
             .setInterval(UPDATE_INTERVAL_MS)
             .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
-    LatLng performance1 = new LatLng(37.664673, 126.765873);
-    LatLng performance2 = new LatLng(37.670073, 126.761242);
-    LatLng performance3 = new LatLng(37.665391, 126.762095);
+    //firebase
 
-    Location per4 = new Location(LocationManager.GPS_PROVIDER);
-    Location per5 = new Location(LocationManager.GPS_PROVIDER);
-    Location per6 = new Location(LocationManager.GPS_PROVIDER);
+    private FirebaseDatabase db;
+    private DatabaseReference ref;
+    private ChildEventListener childEventListener;
+
+    private RecyclerView lv;
+    private VerticalAdapter adapter;
+
+    ArrayList<PostPromote> list_postPrmt = new ArrayList<PostPromote>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,27 +120,17 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_busking_map);
+
         //툴바
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar); //툴바설정
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);//액션바와 같게 만들어줌
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        mVerticalView = (RecyclerView) findViewById(R.id.vertical_list);
-        ArrayList<BuskingData> data = new ArrayList<>();
-
-        int i = 0;
-        while (i < MAX_ITEM_COUNT) {
-            data.add(new BuskingData(R.mipmap.ic_launcher,  "공연이름", "장르", "시간", i+"m"));
-            i++;
-        }
         mLayoutManager = new LinearLayoutManager(this);
-        mVerticalView.setLayoutManager(mLayoutManager);
-        mAdapter = new VerticalAdapter();
-        mAdapter.setData(data);
-        mVerticalView.setAdapter(mAdapter);
 
-        Log.d(TAG, "onCreate");
+
+        //googlemap
         mActivity = this;
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -134,18 +139,57 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
                 .addApi(LocationServices.API)
                 .build();
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        per4.setLatitude(37.548640); per4.setLongitude(126.913488);
-        per5.setLatitude(37.548078); per5.setLongitude(126.911896);
-        per6.setLatitude(37.548627); per6.setLongitude(126.911864);
 
+        //firebase
 
+        lv = (RecyclerView) findViewById(R.id.vertical_list);
+
+        initDatabase();
+
+        lv.setLayoutManager(mLayoutManager);
+        adapter = new VerticalAdapter();
+        adapter.setData(list_postPrmt);
+        lv.setAdapter(adapter);
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //adapter.clear();
+
+                for (DataSnapshot postPrmtData : dataSnapshot.getChildren()) {
+
+                    PostPromote postPrmt = postPrmtData.getValue(PostPromote.class);
+
+                    mBuskingLocation = new Location(LocationManager.GPS_PROVIDER);
+                    mBuskingLocation.setLatitude(postPrmt.postPrmt_busking_latitude);
+                    mBuskingLocation.setLongitude(postPrmt.postPrmt_busking_longitude);
+                    buskingPosition = new LatLng(postPrmt.postPrmt_busking_latitude, postPrmt.postPrmt_busking_longitude);
+
+                    //list추가
+                    ////list_postPrmt_title.add(postPrmt.postPrmt_title);
+                    list_postPrmt.add(postPrmt);
+                    ////adapter.add(postPrmt.postPrmt_title);
+
+                    //marker추가
+                    mGoogleMap.addMarker(new MarkerOptions()
+                            .position(buskingPosition)
+                            .title(postPrmt.postPrmt_busking_title)
+                            .snippet(postPrmt.postPrmt_content));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    public void filterOnclick(View v){
+    public void filterOnclick(View v) {
         final BottomSheetDialog bottomDialog = new BottomSheetDialog(this);
         View dialogLayout = getLayoutInflater().inflate(R.layout.bottom_filter, null);
         ImageView dialogClose = dialogLayout.findViewById(R.id.dialog_close);
@@ -159,11 +203,56 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         bottomDialog.show();
     }
 
+
+    //firebase
+    private void initDatabase() {
+
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference("post_promote");
+
+        childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        ref.addChildEventListener(childEventListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ref.removeEventListener(childEventListener);
+    }
+
+
+    //googlemap
+
     @Override
     public void onResume() {
 
         super.onResume();
-        Log.d(TAG, "onResume");
+
         if (mGoogleApiClient.isConnected()) {
 
             Log.d(TAG, "onResume : call startLocationUpdates");
@@ -181,14 +270,13 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         }
     }
 
-
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {
 
             Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
             showDialogForLocationServiceSetting();
-        }else {
+        } else {
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -205,15 +293,12 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         }
     }
 
-
-
     private void stopLocationUpdates() {
 
-        Log.d(TAG,"stopLocationUpdates : LocationServices.FusedLocationApi.removeLocationUpdates");
+        Log.d(TAG, "stopLocationUpdates : LocationServices.FusedLocationApi.removeLocationUpdates");
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         mRequestingLocationUpdates = false;
     }
-
 
 
     @Override
@@ -221,41 +306,9 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
 
         Log.d(TAG, "onMapReady :");
 
+        MapsInitializer.initialize(getApplicationContext());
+
         mGoogleMap = googleMap;
-
-        /*ArrayList<LatLng> performances = new ArrayList<LatLng>()
-                .add(performance1)
-                .add(performance2)
-                .add(performance3)
-                .add(performance4)
-                .add(performance5)
-                .add(performance6);*/
-
-        mGoogleMap.addMarker(new MarkerOptions()
-                .position(performance1)
-                .title("Performance1")
-                .snippet("라페스타 초입"));
-        mGoogleMap.addMarker(new MarkerOptions()
-                .position(performance2)
-                .title("Performance2")
-                .snippet("주엽역"));
-        mGoogleMap.addMarker(new MarkerOptions()
-                .position(performance3)
-                .title("Performance3")
-                .snippet("경기영상과학고"));
-
-        /*for (int i = 0; i < performances.size(); i++) {
-
-        }*/
-        mGoogleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(per4.getLatitude(), per4.getLongitude()))
-                .title("Performance1"));
-        mGoogleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(per5.getLatitude(), per5.getLongitude()))
-                .title("Performance2"));
-        mGoogleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(per6.getLatitude(), per6.getLongitude()))
-                .title("Performance3"));
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
@@ -264,12 +317,12 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         //mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
+        mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
 
             @Override
             public boolean onMyLocationButtonClick() {
 
-                Log.d( TAG, "onMyLocationButtonClick : 위치에 따른 카메라 이동 활성화");
+                Log.d(TAG, "onMyLocationButtonClick : 위치에 따른 카메라 이동 활성화");
                 mMoveMapByAPI = true;
                 return true;
             }
@@ -279,7 +332,13 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
             @Override
             public void onMapClick(LatLng latLng) {
 
-                Log.d( TAG, "onMapClick :");
+                Log.d(TAG, "onMapClick_MainActivity :");
+                /*mGoogleMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title("test")
+                        .snippet("lat:" + latLng.latitude + "\nlon:" + latLng.longitude));
+
+                buskingPosition = latLng;*/
             }
         });
 
@@ -288,7 +347,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
             @Override
             public void onCameraMoveStarted(int i) {
 
-                if (mMoveMapByUser == true && mRequestingLocationUpdates){
+                if (mMoveMapByUser == true && mRequestingLocationUpdates) {
 
                     Log.d(TAG, "onCameraMove : 위치에 따른 카메라 이동 비활성화");
                     mMoveMapByAPI = false;
@@ -305,7 +364,6 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
             @Override
             public void onCameraMove() {
 
-
             }
         });
 
@@ -316,7 +374,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
     public void onLocationChanged(Location location) {
 
         currentPosition
-                = new LatLng( location.getLatitude(), location.getLongitude());
+                = new LatLng(location.getLatitude(), location.getLongitude());
 
 
         Log.d(TAG, "onLocationChanged : ");
@@ -329,25 +387,45 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         setCurrentLocation(location, markerTitle, markerSnippet);
 
         mCurrentLocation = location;
+        for (PostPromote postPrmtList : list_postPrmt) {
+            mBuskingLocation = new Location(LocationManager.GPS_PROVIDER);
+            mBuskingLocation.setLatitude(postPrmtList.postPrmt_busking_latitude);
+            mBuskingLocation.setLongitude(postPrmtList.postPrmt_busking_longitude);
+            buskingPosition = new LatLng(postPrmtList.postPrmt_busking_latitude, postPrmtList.postPrmt_busking_longitude);
 
-        //현재위치에서 공연장소까지 폴리라인(경로 X)
-        PolylineOptions dist = new PolylineOptions()
-                .add(new LatLng(per4.getLatitude(), per4.getLongitude()), new LatLng(location.getLatitude(), location.getLongitude()));
+            PolylineOptions dist = new PolylineOptions()
+                    .add(buskingPosition, currentPosition);
+            mGoogleMap.addPolyline(dist).setWidth(0);
 
-        mGoogleMap.addPolyline(dist).setWidth(0);
-        //폴리라인 거리 계산
-        float dist4 = location.distanceTo(per4);
-        Log.d(TAG, "dist4 = " + dist4);
-        float dist5 = location.distanceTo(per5);
-        float dist6 = location.distanceTo(per6);
+            Log.d(TAG, "dist(" + postPrmtList.postPrmt_title + "):" + mCurrentLocation.distanceTo(mBuskingLocation));
+            postPrmtList.distance = mCurrentLocation.distanceTo(mBuskingLocation);
+        }
 
+        Log.d(TAG, "distSort");
+        Comparator<PostPromote> distSort = new Comparator<PostPromote>() {
+            @Override
+            public int compare(PostPromote p1, PostPromote p2) {
+                if (p1.distance < p2.distance)
+                    return -1;
+                else if (p1.distance == p2.distance)
+                    return 0;
+                else
+                    return 1;
+            }
+        };
+        Collections.sort(list_postPrmt, distSort);
+        adapter.notifyDataSetChanged();
+
+        for (PostPromote postPrmtList : list_postPrmt) {
+            Log.d(TAG, postPrmtList.postPrmt_title + " : " + postPrmtList.distance);
+        }
     }
 
 
     @Override
     protected void onStart() {
 
-        if(mGoogleApiClient != null && mGoogleApiClient.isConnected() == false){
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected() == false) {
 
             Log.d(TAG, "onStart: mGoogleApiClient connect");
             mGoogleApiClient.connect();
@@ -365,7 +443,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
             stopLocationUpdates();
         }
 
-        if ( mGoogleApiClient.isConnected()) {
+        if (mGoogleApiClient.isConnected()) {
 
             Log.d(TAG, "onStop : mGoogleApiClient disconnect");
             mGoogleApiClient.disconnect();
@@ -378,20 +456,16 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     public void onConnected(Bundle connectionHint) {
 
-
-        if ( mRequestingLocationUpdates == false ) {
+        if (mRequestingLocationUpdates == false) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.ACCESS_FINE_LOCATION);
+                int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
                 if (hasFineLocationPermission == PackageManager.PERMISSION_DENIED) {
 
                     ActivityCompat.requestPermissions(mActivity,
-                            new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-
+                            new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
                 } else {
 
                     Log.d(TAG, "onConnected : 퍼미션 가지고 있음");
@@ -400,7 +474,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
                     mGoogleMap.setMyLocationEnabled(true);
                 }
 
-            }else{
+            } else {
 
                 Log.d(TAG, "onConnected : call startLocationUpdates");
                 startLocationUpdates();
@@ -492,10 +566,10 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
 
         currentMarker = mGoogleMap.addMarker(markerOptions);
 */
-        if ( mMoveMapByAPI ) {
+        if (mMoveMapByAPI) {
 
-            Log.d( TAG, "setCurrentLocation :  mGoogleMap moveCamera "
-                    + location.getLatitude() + " " + location.getLongitude() ) ;
+            Log.d(TAG, "setCurrentLocation :  mGoogleMap moveCamera "
+                    + location.getLatitude() + " " + location.getLongitude());
             // CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentLatLng, 15);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
             mGoogleMap.moveCamera(cameraUpdate);
@@ -549,7 +623,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
 
             Log.d(TAG, "checkPermissions : 퍼미션 가지고 있음");
 
-            if ( mGoogleApiClient.isConnected() == false) {
+            if (mGoogleApiClient.isConnected() == false) {
 
                 Log.d(TAG, "checkPermissions : 퍼미션 가지고 있음");
                 mGoogleApiClient.connect();
@@ -570,12 +644,11 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
             if (permissionAccepted) {
 
 
-                if ( mGoogleApiClient.isConnected() == false) {
+                if (mGoogleApiClient.isConnected() == false) {
 
                     Log.d(TAG, "onRequestPermissionsResult : mGoogleApiClient connect");
                     mGoogleApiClient.connect();
                 }
-
 
 
             } else {
@@ -669,6 +742,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         switch (requestCode) {
 
             case GPS_ENABLE_REQUEST_CODE:
+
                 //사용자가 GPS 활성 시켰는지 검사
                 if (checkLocationServicesStatus()) {
                     if (checkLocationServicesStatus()) {
@@ -676,24 +750,17 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
                         Log.d(TAG, "onActivityResult : 퍼미션 가지고 있음");
 
 
-                        if ( mGoogleApiClient.isConnected() == false ) {
+                        if (mGoogleApiClient.isConnected() == false) {
 
-                            Log.d( TAG, "onActivityResult : mGoogleApiClient connect ");
+                            Log.d(TAG, "onActivityResult : mGoogleApiClient connect ");
                             mGoogleApiClient.connect();
                         }
                         return;
                     }
                 }
+                break;
 
-                break;
-            case FILTER_ACTIVITY_CODE:
-                if (resultCode == RESULT_OK) {
-                    int a = 0;
-                }
-                break;
         }
+
     }
-
-
-
 }

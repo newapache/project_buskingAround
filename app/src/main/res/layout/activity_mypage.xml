@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="onAir"
                 android:text="방송하기"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/watchBroadcast"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="onAir"
                 android:text="on air"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
     </LinearLayout>
 

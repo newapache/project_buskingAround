@@ -90,6 +90,7 @@ public class SignupActivity extends AppCompatActivity {
                                         userModel.profileImageUrl = imageUrl;
                                         userModel.email = email.getText().toString();
                                         userModel.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        userModel.description = "";
 
 
                                         FirebaseDatabase.getInstance().getReference("/").child("users").child(uid).setValue(userModel);

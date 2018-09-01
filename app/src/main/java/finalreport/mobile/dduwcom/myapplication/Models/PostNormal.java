@@ -15,13 +15,13 @@ public class PostNormal implements Serializable {
     public int starCount = 0;
     public Map<String, Boolean> stars = new HashMap<>();
     private List<Comment> comments;
-    public long timeCreated;
+    public String timeCreated;
 
-    public long getTimeCreated() {
+    public String  getTimeCreated() {
         return timeCreated;
     }
 
-    public void setTimeCreated(long timeCreated) {
+    public void setTimeCreated(String timeCreated) {
         this.timeCreated = timeCreated;
     }
 
