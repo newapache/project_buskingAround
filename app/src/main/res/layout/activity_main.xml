@@ -84,7 +84,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="좋아요 기반"/>
+        android:text="선호도 기반"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/horizon_list2"
         android:layout_width="match_parent"

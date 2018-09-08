@@ -7,19 +7,24 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import finalreport.mobile.dduwcom.myapplication.Map.BuskingMap;
 import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
+import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
 import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
 import finalreport.mobile.dduwcom.myapplication.Mypage.MypageActivity;
 import finalreport.mobile.dduwcom.myapplication.SearchActivity;
@@ -27,6 +32,8 @@ import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    FirebaseAuth auth;
 
     android.support.v7.widget.Toolbar toolbar;
     private RecyclerView mHorizontalView1;
@@ -39,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager mLayoutManager2;
     private LinearLayoutManager mLayoutManager3;
 
+
+    //팔로우포스트
+    final ArrayList<PostPromote> followingposts = new ArrayList<PostPromote>();
+
     private int MAX_ITEM_COUNT = 50;
 
     @Override
@@ -46,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        auth = FirebaseAuth.getInstance();
 
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar); //툴바설정
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -61,48 +73,50 @@ public class MainActivity extends AppCompatActivity {
 
         // init Data
         ArrayList<BuskingData> data1 = new ArrayList<>();
-        ArrayList<BuskingData> data2 = new ArrayList<>();
+
         ArrayList<BuskingData> data3 = new ArrayList<>();
+
+        getFollowingPost();
 
         int i = 0;
         while (i < MAX_ITEM_COUNT) {
             data1.add(new BuskingData(R.mipmap.ic_launcher, "위치 "+i+"번째 데이터"));
-            data2.add(new BuskingData(R.mipmap.ic_launcher, "좋아요 "+i+"번째 데이터"));
+
             data3.add(new BuskingData(R.mipmap.ic_launcher, "선호도 "+i+"번째 데이터"));
             i++;
         }
 
 
         // init LayoutManager
-        mLayoutManager1 = new LinearLayoutManager(this);
-        mLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL); // 기본값이 VERTICAL
+//        mLayoutManager1 = new LinearLayoutManager(this);
+//        mLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL); // 기본값이 VERTICAL
 
         mLayoutManager2 = new LinearLayoutManager(this);
         mLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        mLayoutManager3 = new LinearLayoutManager(this);
-        mLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
+//
+//        mLayoutManager3 = new LinearLayoutManager(this);
+//        mLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         // setLayoutManager
-        mHorizontalView1.setLayoutManager(mLayoutManager1);
+//        mHorizontalView1.setLayoutManager(mLayoutManager1);
 
         mHorizontalView2.setLayoutManager(mLayoutManager2);
 
-        mHorizontalView3.setLayoutManager(mLayoutManager3);
+//        mHorizontalView3.setLayoutManager(mLayoutManager3);
 
         // init Adapter
-        mAdapter1 = new HorizontalAdapter();
+//        mAdapter1 = new HorizontalAdapter();
         mAdapter2 = new HorizontalAdapter();
-        mAdapter3 = new HorizontalAdapter();
+//        mAdapter3 = new HorizontalAdapter();
         // set Data
-        mAdapter1.setData(data1);
-        mAdapter2.setData(data2);
-        mAdapter3.setData(data3);
+//        mAdapter1.setData(data1);
+        mAdapter2.setData(followingposts);
+//        mAdapter3.setData(data3);
 
         // set Adapter
-        mHorizontalView1.setAdapter(mAdapter1);
+//        mHorizontalView1.setAdapter(mAdapter1);
         mHorizontalView2.setAdapter(mAdapter2);
-        mHorizontalView3.setAdapter(mAdapter3);
+//        mHorizontalView3.setAdapter(mAdapter3);
 
     }
 
@@ -138,5 +152,108 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+
+    public void getFollowingPost(){
+
+        final ArrayList<String> FollowingUids = new ArrayList<>();
+        //팔로우한 유저의 uid리스트 뽑아오기
+        FirebaseDatabase.getInstance().getReference("following").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot messageData1 : dataSnapshot.getChildren()) {
+                    // child 내에 있는 데이터만큼 반복합니다.
+                    Log.d("following", String.valueOf(messageData1.child("user_id").getValue()));
+                    FollowingUids.add(String.valueOf(messageData1.child("user_id").getValue()));
+
+
+                    //uid들의 홍보글 뽑아오기
+                    FirebaseDatabase.getInstance().getReference("post_promote").orderByChild("postPrmt_uid").equalTo(String.valueOf(messageData1.child("user_id").getValue())).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            for (DataSnapshot messageData2 : dataSnapshot.getChildren()) {
+                                // child 내에 있는 데이터만큼 반복합니다.
+                                PostPromote postprtm = (PostPromote) messageData2.getValue(PostPromote.class);
+                                Log.d("post", String.valueOf((PostPromote) messageData2.getValue(PostPromote.class)));
+                                followingposts.add(postprtm);
+                            }
+
+
+                            dataSnapshot.getKey();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                dataSnapshot.getKey();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+    }
+
+    public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalViewHolder> {
+        private ArrayList<PostPromote> horizontalData;
+
+        public void setData(ArrayList<PostPromote> list){
+            horizontalData = list;
+        }
+
+        @Override
+        public HorizontalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+// 사용할 아이템의 뷰를 생성해준다.
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_item, parent, false);
+
+            HorizontalViewHolder holder = new HorizontalViewHolder(view);
+
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(HorizontalViewHolder holder, int position) {
+            PostPromote data = horizontalData.get(position);
+
+            holder.title.setText(data.getPostPrmt_busking_title());
+            Glide.with(holder.icon.getContext()).load(data.getPostPrmt_imageUrl()).into((holder).icon);
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return horizontalData.size();
+        }
+
+    }
+
+    public class HorizontalViewHolder extends RecyclerView.ViewHolder{
+
+
+        public ImageView icon;
+        public TextView title;
+
+        public HorizontalViewHolder(View itemView) {
+            super(itemView);
+            icon = (ImageView)itemView.findViewById(R.id.busking_icon);
+            title = (TextView) itemView.findViewById(R.id.busking_title);
+        }
+
+    }
+
+
 
 }

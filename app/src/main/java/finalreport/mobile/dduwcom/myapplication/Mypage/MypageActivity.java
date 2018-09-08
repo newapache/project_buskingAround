@@ -38,10 +38,12 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
 
     //
     private FirebaseAuth auth;
+
     private TextView mypage_name,mDescription;
     private TextView mFollowers, mFollowing,  mFollow, mUnfollow;
     private ImageView mUserImage, maddPost;
     private TextView editProfile;
+    private Button goBroadcast, watchBroadcast;
     private int mFollowersCount = 0;
     private int mFollowingCount = 0;
 
@@ -58,6 +60,8 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
         bt_tab1 = (Button)findViewById(R.id.bt_tab1);
         bt_tab2 = (Button)findViewById(R.id.bt_tab2);
         bt_tab3 = (Button)findViewById(R.id.bt_tab3);
+        goBroadcast =(Button)findViewById(R.id.goBroadcast);
+        watchBroadcast = (Button)findViewById(R.id.watchBroadcast);
 
         mFollowers = (TextView) findViewById(R.id.tvFollowers);
         mFollowing = (TextView) findViewById(R.id.tvFollowing);
@@ -178,6 +182,8 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
         mUnfollow.setVisibility(View.VISIBLE);
         editProfile.setVisibility(View.GONE);
         maddPost.setVisibility(View.GONE);
+        watchBroadcast.setVisibility(View.VISIBLE);
+        goBroadcast.setVisibility(View.GONE);
         getFollowingCount();
         getFollowersCount();
     }
@@ -188,6 +194,8 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
         mUnfollow.setVisibility(View.GONE);
         editProfile.setVisibility(View.GONE);
         maddPost.setVisibility(View.GONE);
+        watchBroadcast.setVisibility(View.VISIBLE);
+        goBroadcast.setVisibility(View.GONE);
         getFollowingCount();
         getFollowersCount();
     }
@@ -196,6 +204,9 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
         mFollow.setVisibility(View.GONE);
         mUnfollow.setVisibility(View.GONE);
         editProfile.setVisibility(View.VISIBLE);
+        watchBroadcast.setVisibility(View.GONE);
+        goBroadcast.setVisibility(View.VISIBLE);
+
     }
 
     private void getFollowersCount(){

@@ -1,20 +1,21 @@
+
+
 package finalreport.mobile.dduwcom.myapplication.Map;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+        import android.support.v7.widget.RecyclerView;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
+        import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-import finalreport.mobile.dduwcom.myapplication.Map.VerticalViewHolder;
-import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
-import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
-import finalreport.mobile.dduwcom.myapplication.Mypage.Fragment1;
-import io.antmedia.android.liveVideoBroadcaster.R;
+        import finalreport.mobile.dduwcom.myapplication.Map.VerticalViewHolder;
+        import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
+        import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
+        import io.antmedia.android.liveVideoBroadcaster.R;
 
 /**
  * Created by kohheekyung on 2018. 6. 27..
@@ -45,7 +46,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalViewHolder> {
         holder.title.setText(postPrmt.postPrmt_busking_title);
         /*holder.genre.setText(postPrmt.postPrmt_content);
         holder.time.setText(postPrmt.postPrmt_content);*/
-        holder.location.setText(String.valueOf(postPrmt.postPrmt_busking_latitude) + String.valueOf(postPrmt.postPrmt_busking_longitude));
+        holder.distance.setText(String.valueOf(postPrmt.postPrmt_distance) + "km ");
+
         Glide.with(holder.icon.getContext()).load(postPrmt.getPostPrmt_imageUrl()).into(holder.icon);
     }
 

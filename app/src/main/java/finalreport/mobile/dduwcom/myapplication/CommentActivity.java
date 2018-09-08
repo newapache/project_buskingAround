@@ -2,7 +2,6 @@ package finalreport.mobile.dduwcom.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,15 +26,11 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import finalreport.mobile.dduwcom.myapplication.Main.HorizontalViewHolder;
-import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
 import finalreport.mobile.dduwcom.myapplication.Models.Comment;
 import finalreport.mobile.dduwcom.myapplication.Models.PostNormal;
 import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
-import finalreport.mobile.dduwcom.myapplication.Mypage.Fragment2;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class CommentActivity extends AppCompatActivity {

@@ -116,7 +116,7 @@ public class Fragment1 extends Fragment {
             holder.title.setText(data.getPostPrmt_busking_title());
             holder.genre.setText(data.getPostPrmt_title());
             holder.time.setText(data.getTimeCreated());
-            holder.location.setText("10");
+            holder.location.setText("홍대 놀이터");
             Glide.with(holder.icon.getContext()).load(data.getPostPrmt_imageUrl()).into(((CardviewViewHolder)holder).icon);
 
         }

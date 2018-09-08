@@ -398,16 +398,16 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
             mGoogleMap.addPolyline(dist).setWidth(0);
 
             Log.d(TAG, "dist(" + postPrmtList.postPrmt_title + "):" + mCurrentLocation.distanceTo(mBuskingLocation));
-            postPrmtList.distance = mCurrentLocation.distanceTo(mBuskingLocation);
+            postPrmtList.postPrmt_distance = mCurrentLocation.distanceTo(mBuskingLocation);
         }
 
         Log.d(TAG, "distSort");
         Comparator<PostPromote> distSort = new Comparator<PostPromote>() {
             @Override
             public int compare(PostPromote p1, PostPromote p2) {
-                if (p1.distance < p2.distance)
+                if (p1.postPrmt_distance < p2.postPrmt_distance)
                     return -1;
-                else if (p1.distance == p2.distance)
+                else if (p1.postPrmt_distance == p2.postPrmt_distance)
                     return 0;
                 else
                     return 1;
@@ -417,7 +417,7 @@ public class BuskingMap extends AppCompatActivity implements OnMapReadyCallback,
         adapter.notifyDataSetChanged();
 
         for (PostPromote postPrmtList : list_postPrmt) {
-            Log.d(TAG, postPrmtList.postPrmt_title + " : " + postPrmtList.distance);
+            Log.d(TAG, postPrmtList.postPrmt_title + " : " + postPrmtList.postPrmt_distance);
         }
     }
 

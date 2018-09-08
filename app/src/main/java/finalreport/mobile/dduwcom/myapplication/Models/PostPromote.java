@@ -4,7 +4,7 @@ package finalreport.mobile.dduwcom.myapplication.Models;
 public class PostPromote {
     public String postPrmt_postID;
     public String postPrmt_title;
-    public String postPrmt_imageUrl;
+public String postPrmt_imageUrl;
     public String postPrmt_content;
     public String postPrmt_busking_title;
     public String postPrmt_uid;
@@ -12,15 +12,8 @@ public class PostPromote {
     public double postPrmt_busking_latitude;
     public double postPrmt_busking_longitude;
     public String timeCreated;
-    public double distance;
+    public double postPrmt_distance;
 
-    public double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
 
     public String  getTimeCreated() {
         return timeCreated;
