@@ -9,10 +9,9 @@
     tools:context="finalreport.mobile.dduwcom.myapplication.Login.SplashActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/chat"/>
-
+        android:layout_width="312dp"
+        android:layout_height="410dp"
+        android:src="@drawable/busk2" />
 
 
 </LinearLayout>
