@@ -8,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.AsyncTask;
@@ -16,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -28,12 +31,22 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import finalreport.mobile.dduwcom.myapplication.Models.Stream;
 import io.antmedia.android.broadcaster.ILiveVideoBroadcaster;
 import io.antmedia.android.broadcaster.LiveVideoBroadcaster;
 import io.antmedia.android.broadcaster.utils.Resolution;
@@ -56,6 +69,8 @@ public class LiveVideoBroadcasterActivity extends AppCompatActivity {
     private GLSurfaceView mGLView;
     private ILiveVideoBroadcaster mLiveVideoBroadcaster;
     private Button mBroadcastControlButton;
+
+    Stream stream;
 
     /** Defines callbacks for service binding, passed to bindService() */
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -263,6 +278,21 @@ public class LiveVideoBroadcasterActivity extends AppCompatActivity {
                             }
                         }
                     }.execute(RTMP_BASE_URL + streamName);
+                    //Firebase에 방송 정보 저장
+                    stream = new Stream();
+                    String path = FirebaseDatabase.getInstance().getReference().push().toString();
+                    String streamId = path.substring(path.lastIndexOf("/") + 1);
+                    SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy.MM.dd HH:mm:ss", Locale.KOREA );
+                    Date currentTime = new Date ( );
+                    String dTime = formatter.format ( currentTime );
+                    stream.streamId = streamId;
+                    stream.streamName = streamName;
+                    stream.streamUrl = RTMP_BASE_URL + streamName;
+                    stream.streamTime = dTime;
+                    stream.isStreaming = true;
+                    stream.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    FirebaseDatabase.getInstance().getReference().child("stream").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(streamId).setValue(stream);
+
                 }
                 else {
                     Snackbar.make(mRootView, R.string.streaming_not_finished, Snackbar.LENGTH_LONG).show();
@@ -291,8 +321,9 @@ public class LiveVideoBroadcasterActivity extends AppCompatActivity {
             stopTimer();
             mLiveVideoBroadcaster.stopBroadcasting();
         }
-
-        mIsRecording = false;
+        Map<String, Object> taskMap = new HashMap<String, Object>();
+        taskMap.put("isStreaming", false);
+        FirebaseDatabase.getInstance().getReference().child("stream").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(stream.streamId).updateChildren(taskMap);
     }
 
     //This method starts a mTimer and updates the textview to show elapsed time for recording

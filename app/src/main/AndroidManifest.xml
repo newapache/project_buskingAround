@@ -69,9 +69,12 @@
         </activity>
         <activity android:name="finalreport.mobile.dduwcom.myapplication.NormPostItem" />
         <activity android:name="finalreport.mobile.dduwcom.myapplication.ReadPost.NormPostDetailActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.ReadPost.PrmtPostDetailActivity" />
         <activity android:name="finalreport.mobile.dduwcom.myapplication.CommentActivity" />
+        <activity android:name="finalreport.mobile.dduwcom.myapplication.prmtCommentActivity" />
         <activity android:name="finalreport.mobile.dduwcom.myapplication.SearchActivity" />
         <activity android:name="finalreport.mobile.dduwcom.myapplication.EditProfileActivity"></activity>
+        <activity android:name="io.antmedia.android.liveVideoPlayer.streamPlayerActivity"></activity>
     </application>
 
 </manifest>

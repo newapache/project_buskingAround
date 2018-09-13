@@ -3,6 +3,7 @@ package finalreport.mobile.dduwcom.myapplication.Mypage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,15 +20,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+
+import java.io.EOFException;
+
 import finalreport.mobile.dduwcom.myapplication.CreatePost.MakePost;
 import finalreport.mobile.dduwcom.myapplication.EditProfileActivity;
 import finalreport.mobile.dduwcom.myapplication.Models.PostNormal;
 import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
+import finalreport.mobile.dduwcom.myapplication.Models.Stream;
 import io.antmedia.android.liveVideoBroadcaster.LiveVideoBroadcasterActivity;
 import io.antmedia.android.liveVideoBroadcaster.R;
 import io.antmedia.android.liveVideoPlayer.LiveVideoPlayerActivity;
+import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
 
-public class MypageActivity extends AppCompatActivity implements View.OnClickListener{
+    public class MypageActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     private final int FRAGMENT1 = 1;
@@ -290,8 +296,39 @@ public class MypageActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent1);
                 break;
             case R.id.watchBroadcast:
-                Intent intent2 =  new Intent(this,  LiveVideoPlayerActivity.class);
-                startActivity(intent2);
+                Intent intent2 =  new Intent(this,  streamPlayerActivity.class);
+                final String[] s = new String[1];
+                FirebaseDatabase.getInstance().getReference("stream").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                            // child 내에 있는 데이터만큼 반복합니다.
+                            Stream stream = (Stream) messageData.getValue(Stream.class);
+                            if(!stream.isStreaming) {
+                                s[0] = stream.getStreamName();
+                            }
+                        }
+                        dataSnapshot.getKey();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                Log.d("뭐지",s[0]);
+                try{
+                    Log.d("뭐지",s[0]);
+                    intent2.putExtra("streamName live=1",s[0]);
+                    startActivity(intent2);
+                }
+                catch (RuntimeException e){
+                    AlertDialog dialog = new AlertDialog.Builder(this)
+                            .setMessage("방송중이 아닙니다.")
+                            .setPositiveButton("확인", null)
+                            .create();
+                    dialog.show();
+                }
                 break;
             case R.id.ic_add_post :
                 Intent intent3 = new Intent(this, MakePost.class);

@@ -1,5 +1,7 @@
 package finalreport.mobile.dduwcom.myapplication.Mypage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,12 +22,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
 import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
 import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
+import finalreport.mobile.dduwcom.myapplication.ReadPost.NormPostDetailActivity;
+import finalreport.mobile.dduwcom.myapplication.ReadPost.PrmtPostDetailActivity;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class Fragment1 extends Fragment {
@@ -110,7 +115,7 @@ public class Fragment1 extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(CardviewViewHolder holder, int position) {
+        public void onBindViewHolder(CardviewViewHolder holder, final int position) {
             PostPromote data = cardviewData.get(position);
 
             holder.title.setText(data.getPostPrmt_busking_title());
@@ -118,6 +123,19 @@ public class Fragment1 extends Fragment {
             holder.time.setText(data.getTimeCreated());
             holder.location.setText("홍대 놀이터");
             Glide.with(holder.icon.getContext()).load(data.getPostPrmt_imageUrl()).into(((CardviewViewHolder)holder).icon);
+
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context , PrmtPostDetailActivity.class);
+
+                    intent.putExtra("detail", (Serializable) prmtposts.get(position));
+                    intent.putExtra("uidKey",  uidList.get(position));
+
+                    startActivity(intent);
+                }
+            });
 
         }
 
@@ -136,9 +154,11 @@ public class Fragment1 extends Fragment {
         public TextView genre;
         public TextView time;
         public TextView location;
+        public final View mView;
 
         public CardviewViewHolder(View itemView) {
             super(itemView);
+            mView = itemView;
             icon = (ImageView)itemView.findViewById(R.id.vertical_icon);
             title = (TextView) itemView.findViewById(R.id.vertical_title);
             genre = (TextView) itemView.findViewById(R.id.vertical_genre);

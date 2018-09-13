@@ -1,7 +1,12 @@
 package finalreport.mobile.dduwcom.myapplication.Models;
 
 
-public class PostPromote {
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class PostPromote implements Serializable {
     public String postPrmt_postID;
     public String postPrmt_title;
 public String postPrmt_imageUrl;
@@ -13,7 +18,42 @@ public String postPrmt_imageUrl;
     public double postPrmt_busking_longitude;
     public String timeCreated;
     public double postPrmt_distance;
+    public int starCount = 0;
+    public Map<String, Boolean> stars = new HashMap<>();
+    private List<Comment> comments;
 
+
+    public double getPostPrmt_distance() {
+        return postPrmt_distance;
+    }
+
+    public void setPostPrmt_distance(double postPrmt_distance) {
+        this.postPrmt_distance = postPrmt_distance;
+    }
+
+    public int getStarCount() {
+        return starCount;
+    }
+
+    public void setStarCount(int starCount) {
+        this.starCount = starCount;
+    }
+
+    public Map<String, Boolean> getStars() {
+        return stars;
+    }
+
+    public void setStars(Map<String, Boolean> stars) {
+        this.stars = stars;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public String  getTimeCreated() {
         return timeCreated;

@@ -1,5 +1,6 @@
 package finalreport.mobile.dduwcom.myapplication.Login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,7 +28,7 @@ import com.google.firebase.storage.UploadTask;
 import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity{
 
     private static final int PICK_FROM_ALBUM = 10;
     private EditText email;
@@ -64,53 +67,58 @@ public class SignupActivity extends AppCompatActivity {
         signup = (Button) findViewById(R.id.signupActivity_button_signup);
         signup.setBackgroundColor(Color.parseColor(splash_background));
 
+        try {
+            signup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (email.getText().toString() == null || name.getText().toString() ==null || password.getText().toString() == null){
-                    return;
-                }
-
-                FirebaseAuth.getInstance()
-                        .createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                        .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                final String uid = task.getResult().getUser().getUid();
-                                FirebaseStorage.getInstance().getReference("/").child("userImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                        @SuppressWarnings("VisibleForTests")
-                                        String imageUrl = task.getResult().getDownloadUrl().toString();
-
-                                        UserModel userModel = new UserModel();
-                                        userModel.userName = name.getText().toString();
-                                        userModel.profileImageUrl = imageUrl;
-                                        userModel.email = email.getText().toString();
-                                        userModel.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                        userModel.description = "";
+                    if (email.getText().toString() == null || name.getText().toString() == null || password.getText().toString() == null) {
+                        return;
+                    }
 
 
-                                        FirebaseDatabase.getInstance().getReference("/").child("users").child(uid).setValue(userModel);
+                    FirebaseAuth.getInstance()
+                            .createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                            .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    final String uid = task.getResult().getUser().getUid();
+                                    FirebaseStorage.getInstance().getReference("/").child("userImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                            @SuppressWarnings("VisibleForTests")
+                                            String imageUrl = task.getResult().getDownloadUrl().toString();
+
+                                            UserModel userModel = new UserModel();
+                                            userModel.userName = name.getText().toString();
+                                            userModel.profileImageUrl = imageUrl;
+                                            userModel.email = email.getText().toString();
+                                            userModel.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                            userModel.description = "";
+
+
+                                            FirebaseDatabase.getInstance().getReference("/").child("users").child(uid).setValue(userModel);
 //                                        FirebaseDatabase.getInstance().getReference("/").child("users").child(uid).setValue(userModel);
 
 
-                                    }
-                                });
+                                        }
+                                    });
 
 
+                                }
+                            });
 
 
-                            }
-                        });
+                }
+            });
 
-
-            }
-        });
-
-
+        }catch (Exception e){
+            AlertDialog dialog = new AlertDialog.Builder(SignupActivity.this)
+                    .setMessage("동일한 이메일이 존재합니다.")
+                    .setPositiveButton("확인", null)
+                    .create();
+            dialog.show();
+        }
     }
 
     @Override
@@ -120,4 +128,6 @@ public class SignupActivity extends AppCompatActivity {
             imageUri = data.getData();// 이미지 경로 원본
         }
     }
+
+
 }

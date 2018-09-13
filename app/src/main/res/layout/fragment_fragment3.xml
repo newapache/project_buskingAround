@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="finalreport.mobile.dduwcom.myapplication.Mypage.Fragment3">
+    tools:context="finalreport.mobile.dduwcom.myapplication.Mypage.Fragment3"
+    >
 
-    <TextView
-        android:gravity="center"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/stream_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="프래그먼트 3"/>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 </FrameLayout>

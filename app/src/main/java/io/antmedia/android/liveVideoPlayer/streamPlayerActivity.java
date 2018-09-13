@@ -72,13 +72,16 @@ import java.net.CookieManager;
 import java.net.CookiePolicy;
 
 import io.antmedia.android.liveVideoBroadcaster.R;
+import io.antmedia.android.liveVideoPlayer.DefaultExtractorsFactoryForFLV;
+import io.antmedia.android.liveVideoPlayer.EventLogger;
+import io.antmedia.android.liveVideoPlayer.RtmpDataSource;
 
 import static io.antmedia.android.LiveMainActivity.RTMP_BASE_URL;
 
 /**
  * An activity that plays media using {@link SimpleExoPlayer}.
  */
-public class LiveVideoPlayerActivity extends AppCompatActivity implements OnClickListener, ExoPlayer.EventListener,
+public class streamPlayerActivity extends AppCompatActivity implements OnClickListener, ExoPlayer.EventListener,
         PlaybackControlView.VisibilityListener {
 
   public static final String PREFER_EXTENSION_DECODERS = "prefer_extension_decoders";
@@ -111,11 +114,17 @@ public class LiveVideoPlayerActivity extends AppCompatActivity implements OnClic
   private EditText videoNameEditText;
   private View videoStartControlLayout;
 
+  private String streamName;
+
   // Activity lifecycle
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    Intent intent = getIntent();
+    streamName = intent.getStringExtra("streamName");
+
 
     userAgent = Util.getUserAgent(this, "ExoPlayerDemo");
     shouldAutoPlay = true;
@@ -127,7 +136,7 @@ public class LiveVideoPlayerActivity extends AppCompatActivity implements OnClic
       CookieHandler.setDefault(DEFAULT_COOKIE_MANAGER);
     }
 
-    setContentView(R.layout.live_video_player);
+    setContentView(R.layout.live_video_streamer);
     View rootView = findViewById(R.id.root);
     rootView.setOnClickListener(this);
     debugRootView = (LinearLayout) findViewById(R.id.controls_root);
@@ -135,12 +144,14 @@ public class LiveVideoPlayerActivity extends AppCompatActivity implements OnClic
     retryButton = (Button) findViewById(R.id.retry_button);
     retryButton.setOnClickListener(this);
 
-    videoNameEditText = (EditText) findViewById(R.id.video_name_edit_text);
+//    videoNameEditText = (EditText) findViewById(R.id.video_name_edit_text);
     videoStartControlLayout = findViewById(R.id.video_start_control_layout);
 
     simpleExoPlayerView = (SimpleExoPlayerView) findViewById(R.id.player_view);
     simpleExoPlayerView.setControllerVisibilityListener(this);
     simpleExoPlayerView.requestFocus();
+
+    play();
 
   }
 
@@ -172,7 +183,7 @@ public class LiveVideoPlayerActivity extends AppCompatActivity implements OnClic
   public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                          int[] grantResults) {
     if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-      play(null);
+      play();
     } else {
       showToast(R.string.storage_permission_denied);
       finish();
@@ -194,7 +205,7 @@ public class LiveVideoPlayerActivity extends AppCompatActivity implements OnClic
   @Override
   public void onClick(View view) {
     if (view == retryButton) {
-      play(null);
+      play();
     }
   }
 
@@ -403,7 +414,7 @@ public class LiveVideoPlayerActivity extends AppCompatActivity implements OnClic
     needRetrySource = true;
     if (isBehindLiveWindow(e)) {
       clearResumePosition();
-      play(null);
+      play();
     } else {
       updateResumePosition();
       showControls();
@@ -465,8 +476,9 @@ public class LiveVideoPlayerActivity extends AppCompatActivity implements OnClic
     return BuildConfig.FLAVOR.equals("withExtensions");
   }
 
-  public void play(View view) {
-    String URL = RTMP_BASE_URL + videoNameEditText.getText().toString() + " live=1";
+  public void play() {
+//    String URL = RTMP_BASE_URL + videoNameEditText.getText().toString();
+    String URL = RTMP_BASE_URL + streamName;
     //String URL = "http://192.168.1.34:5080/vod/streams/test_adaptive.m3u8";
     initializePlayer(URL);
     videoStartControlLayout.setVisibility(View.GONE);
