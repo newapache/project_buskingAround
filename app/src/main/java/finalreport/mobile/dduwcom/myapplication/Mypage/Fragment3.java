@@ -116,7 +116,11 @@ public class Fragment3 extends Fragment {
         public void onBindViewHolder(StreamViewHolder holder, int position) {
             final Stream data = streamData.get(position);
 
-            holder.date.setText(data.getStreamTime());
+
+            String str = data.getStreamTime();
+            String result = str.substring(0, 10);
+
+            holder.date.setText(result+" 방송본");
             holder.name.setText(data.getStreamName());
             holder.gostream.setOnClickListener(new View.OnClickListener() {
                 @Override

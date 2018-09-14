@@ -113,7 +113,7 @@ public class PostFragment2 extends Fragment{
 
                         String path = FirebaseDatabase.getInstance().getReference().push().toString();
                         final String postId = path.substring(path.lastIndexOf("/") + 1);
-                        SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy.MM.dd HH:mm:ss", Locale.KOREA );
+                        SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy년 MM월 dd일", Locale.KOREA );
                         Date currentTime = new Date ( );
                         String dTime = formatter.format ( currentTime );
 

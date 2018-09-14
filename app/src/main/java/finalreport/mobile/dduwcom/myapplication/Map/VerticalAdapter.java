@@ -47,7 +47,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalViewHolder> {
         /*holder.genre.setText(postPrmt.postPrmt_content);
         holder.time.setText(postPrmt.postPrmt_content);*/
         holder.distance.setText(String.valueOf(postPrmt.postPrmt_distance) + "km ");
-
+        holder.time.setText(postPrmt.busking_date+postPrmt.busking_time+ "에 시작");
         Glide.with(holder.icon.getContext()).load(postPrmt.getPostPrmt_imageUrl()).into(holder.icon);
     }
 

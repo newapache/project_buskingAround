@@ -21,7 +21,24 @@ public String postPrmt_imageUrl;
     public int starCount = 0;
     public Map<String, Boolean> stars = new HashMap<>();
     private List<Comment> comments;
+    public String busking_time;
+    public String busking_date;
 
+    public String getBusking_time() {
+        return busking_time;
+    }
+
+    public void setBusking_time(String busking_time) {
+        this.busking_time = busking_time;
+    }
+
+    public String getBusking_date() {
+        return busking_date;
+    }
+
+    public void setBusking_date(String busking_date) {
+        this.busking_date = busking_date;
+    }
 
     public double getPostPrmt_distance() {
         return postPrmt_distance;

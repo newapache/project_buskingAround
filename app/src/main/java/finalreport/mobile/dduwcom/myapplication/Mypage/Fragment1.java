@@ -121,6 +121,7 @@ public class Fragment1 extends Fragment {
             holder.title.setText(data.getPostPrmt_busking_title());
             holder.genre.setText(data.getPostPrmt_title());
             holder.time.setText(data.getTimeCreated());
+            holder.btime.setText(data.getBusking_date() +" "+ data.getBusking_time());
             holder.location.setText("홍대 놀이터");
             Glide.with(holder.icon.getContext()).load(data.getPostPrmt_imageUrl()).into(((CardviewViewHolder)holder).icon);
 
@@ -153,6 +154,7 @@ public class Fragment1 extends Fragment {
         public TextView title;
         public TextView genre;
         public TextView time;
+        public TextView btime;
         public TextView location;
         public final View mView;
 
@@ -163,6 +165,7 @@ public class Fragment1 extends Fragment {
             title = (TextView) itemView.findViewById(R.id.vertical_title);
             genre = (TextView) itemView.findViewById(R.id.vertical_genre);
             time = (TextView) itemView.findViewById(R.id.vertical_time);
+            btime = (TextView) itemView.findViewById(R.id.busking_time);
             location = (TextView) itemView.findViewById(R.id.vertical_location);
         }
 

@@ -16,9 +16,11 @@ public class VerticalViewHolder extends RecyclerView.ViewHolder{
 
     public ImageView icon;
     public TextView title;
+    public TextView busker;
     /*public TextView genre;
     public TextView time;*/
     public TextView distance;
+    public TextView time;
 
     public VerticalViewHolder(View itemView) {
         super(itemView);
@@ -27,6 +29,7 @@ public class VerticalViewHolder extends RecyclerView.ViewHolder{
         /*genre = (TextView) itemView.findViewById(R.id.vertical_genre);
         time = (TextView) itemView.findViewById(R.id.vertical_time);*/
         distance = (TextView) itemView.findViewById(R.id.vertical_location);
+        time = (TextView) itemView.findViewById(R.id.vertical_time);
     }
 
 }

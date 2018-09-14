@@ -25,7 +25,7 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+        <LinearLayout
         android:id="@id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,9 +33,10 @@
         android:layout_below="@+id/toolbar">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:padding="6dp"
+            android:id="@+id/mypage_user_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/mypage_user_image"
             android:src="@drawable/ic_launcher_background" />
 
         <include layout="@layout/snippet_top_view_profile" />
@@ -131,26 +132,32 @@
         android:id="@+id/linearLayout4"
         >
 
-        <Button
+
+        <ImageButton
+            android:background="#fed053"
             android:layout_weight="1"
             android:id="@+id/bt_tab1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tab 1"/>
+            android:layout_height="50dp"
+            android:src="@mipmap/megaphone"/>
 
-        <Button
+
+        <ImageButton
+            android:background="#fed053"
             android:layout_weight="1"
             android:id="@+id/bt_tab2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tab 2"/>
+            android:layout_height="50dp"
+            android:src="@mipmap/survey"/>
 
-        <Button
+
+        <ImageButton
+            android:background="#fed053"
             android:layout_weight="1"
             android:id="@+id/bt_tab3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tab 3"/>
+            android:layout_height="50dp"
+            android:src="@mipmap/video"/>
 
 
 

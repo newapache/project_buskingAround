@@ -3,6 +3,8 @@ package finalreport.mobile.dduwcom.myapplication.CreatePost;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,6 +20,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -29,8 +32,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -65,6 +70,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -80,7 +86,8 @@ import static android.content.Context.LOCATION_SERVICE;
 public class PostFragment1 extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        com.google.android.gms.location.LocationListener {
+        com.google.android.gms.location.LocationListener
+        {
 
     public static final int GALLERY_CODE = 10;
 
@@ -123,6 +130,12 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
     private ImageView iv_postImg;
     private Button btnCreatePost;
     private Button btnSelectLocation;
+    private DatePicker mDate;
+    private Button bdate;
+    String date;
+    private TimePicker mTime;
+    Calendar c;
+    String time;
 
     //image
     private Uri postImageUri;
@@ -180,7 +193,9 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
         iv_postImg = view.findViewById(R.id.postfragment1_image);
         btnCreatePost = (Button)view.findViewById(R.id.btnCreatePost);
         btnSelectLocation = (Button)view.findViewById(R.id.btnSelectLocation);
-
+        mDate = (DatePicker) view.findViewById(R.id.datepicker);
+        bdate = (Button) view.findViewById(R.id.daypicker);
+        mTime = (TimePicker) view.findViewById(R.id.timepicker);
         iv_postImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,7 +208,7 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
             @Override
             public void onClick(View v) {
                 createPostPromote(et_title.getText().toString(), et_content.getText().toString(),
-                        et_bTitle.getText().toString(), buskingPosition.latitude/*Double.parseDouble(et_bLat.getText().toString())*/, /*Double.parseDouble(et_bLon.getText().toString())*/buskingPosition.longitude);
+                        et_bTitle.getText().toString(), buskingPosition.latitude/*Double.parseDouble(et_bLat.getText().toString())*/, /*Double.parseDouble(et_bLon.getText().toString())*/buskingPosition.longitude, date, time);
 
                 //startActivity(new Intent(getContext(), ReadPostPrmtActivity.class));
             }
@@ -213,6 +228,61 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
                 }
             }
         });
+
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy년 MM월 dd일", Locale.KOREA );
+        Date currentTime = new Date ( );
+        String dTime = formatter.format ( currentTime );
+
+        date = String.valueOf(dTime);
+        mDate.init(mDate.getYear(), mDate.getMonth(), mDate.getDayOfMonth(),
+
+                new DatePicker.OnDateChangedListener() {
+
+                    @Override
+
+                    public void onDateChanged(DatePicker view, int year, int monthOfYear,
+
+                                              int dayOfMonth) {
+
+
+                       date = String.format("%d년 %d월 %d일", year,monthOfYear + 1
+
+                                , dayOfMonth);
+
+
+
+                    }
+
+                });
+
+        c = Calendar.getInstance();
+        int hour= c.get(c.HOUR_OF_DAY);
+        int minute = c.get(c.MINUTE);
+        int second = c.get(c.SECOND);
+
+        if (hour >= 12)
+            time = "오후 "+( hour-12)+"시 "+minute+"분";
+        else
+            time = "오전 "+ hour+"시 "+minute+"분";
+
+
+        mTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker timePicker, int hour, int min) {
+
+                if (hour >= 12)
+                    time = "오후 "+ hour+"시 "+min+"분";
+                else
+                    time = "오전"+ hour+"시 "+min+"분";
+
+
+            }
+        });
+
+
+
 
         return view;
     }
@@ -734,7 +804,7 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
 
     //createPostPromote
     private void createPostPromote(final String postPrmt_title, final String postPrmt_content,
-                                   final String postPrmt_busking_title, final double postPrmt_busking_latitude, final double postPrmt_busking_longitude) {
+                                   final String postPrmt_busking_title, final double postPrmt_busking_latitude, final double postPrmt_busking_longitude, final String date, final String time) {
 
         FirebaseStorage.getInstance().getReference().child("prmtPostImages").child(postPrmt_title).putFile(postImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -744,7 +814,7 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
                 String path = ref.push().toString();
                 String postId = path.substring(path.lastIndexOf("/") + 1);
 
-                SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy.MM.dd HH:mm:ss", Locale.KOREA );
+                SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy년 MM월 dd일", Locale.KOREA );
                 Date currentTime = new Date ( );
                 String dTime = formatter.format ( currentTime );
 
@@ -759,6 +829,8 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
                 postPrmt.postPrmt_busking_longitude = postPrmt_busking_longitude;
                 postPrmt.timeCreated = dTime;
                 postPrmt.postPrmt_imageUrl = imageUrl;
+                postPrmt.busking_date = date;
+                postPrmt.busking_time = time;
                 ref.child("post_promote").child(postId).setValue(postPrmt);
             }
 
