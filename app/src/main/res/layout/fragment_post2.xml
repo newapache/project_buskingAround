@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
 
     <ImageView
-        android:src="@drawable/chat"
+        android:layout_gravity="center"
+        android:src="@mipmap/addimage"
         android:id="@+id/postfragment2_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -20,24 +22,29 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="postNorm_title" />
+        android:hint="제목"/>
 
     <EditText
+        android:hint="내용"
+        android:layout_marginTop="10dp"
         android:id="@+id/et_Normcontent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="postNorm_content" />
+      />
 
 
 
 
     <Button
+        android:background="#fed053"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
         android:id="@+id/btnCreateNormPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CreateNormPost" />
+        android:text="일반 게시글 올리기" />
 
 
 </LinearLayout>

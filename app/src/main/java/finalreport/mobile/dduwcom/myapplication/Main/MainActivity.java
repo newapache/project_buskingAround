@@ -264,7 +264,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                         // child 내에 있는 데이터만큼 반복합니다.
-                        Log.d("빡친다", messageData.getKey());
 
                         Glide.with(holder.icon.getContext()).load(messageData.getValue(UserModel.class).profileImageUrl).into((holder).icon);
 

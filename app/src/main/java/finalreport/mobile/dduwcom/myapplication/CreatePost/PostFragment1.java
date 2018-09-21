@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,6 +36,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -129,9 +131,9 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
     private EditText et_bTitle;
     private ImageView iv_postImg;
     private Button btnCreatePost;
+    private TextView tvSelectLocation;
     private Button btnSelectLocation;
     private DatePicker mDate;
-    private Button bdate;
     String date;
     private TimePicker mTime;
     Calendar c;
@@ -192,9 +194,10 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
         et_bTitle = (EditText)view.findViewById(R.id.et_bTitle);
         iv_postImg = view.findViewById(R.id.postfragment1_image);
         btnCreatePost = (Button)view.findViewById(R.id.btnCreatePost);
+        tvSelectLocation = (TextView) view.findViewById(R.id.tvSelectLocation);
         btnSelectLocation = (Button)view.findViewById(R.id.btnSelectLocation);
         mDate = (DatePicker) view.findViewById(R.id.datepicker);
-        bdate = (Button) view.findViewById(R.id.daypicker);
+
         mTime = (TimePicker) view.findViewById(R.id.timepicker);
         iv_postImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,6 +232,20 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
             }
         });
 
+        tvSelectLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
+                try {
+                    Intent intent = intentBuilder.build(getActivity());
+                    startActivityForResult(intent,PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy년 MM월 dd일", Locale.KOREA );

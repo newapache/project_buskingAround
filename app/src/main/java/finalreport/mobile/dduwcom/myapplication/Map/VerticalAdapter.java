@@ -56,3 +56,5 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalViewHolder> {
         return verticalPostPrmt.size();
     }
 }
+
+

@@ -3,17 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    
+
     <LinearLayout
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <!--<ImageView-->
+            <!--android:id="@+id/vertical_icon"-->
+            <!--android:src="@mipmap/ic_launcher"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="100dp" />-->
+
+        <finalreport.mobile.dduwcom.myapplication.Utils.SquareImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/vertical_icon"
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="150dp"
-            android:layout_height="100dp" />
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"/>
+
 
     </LinearLayout>
     <LinearLayout

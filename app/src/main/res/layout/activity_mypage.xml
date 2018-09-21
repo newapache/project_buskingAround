@@ -33,16 +33,135 @@
         android:layout_below="@+id/toolbar">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:padding="6dp"
+            android:layout_marginLeft="10dp"
+            android:padding="2dp"
             android:id="@+id/mypage_user_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_launcher_background" />
 
-        <include layout="@layout/snippet_top_view_profile" />
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvFollowers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="4dp"
+                            android:text="300"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textFollowers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="48dp"
+                            android:layout_marginTop="4dp"
+                            android:text="팔로워"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="85dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_marginLeft="13dp"
+                            android:id="@+id/tvFollowing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="400"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
 
 
-    </LinearLayout>
+                        <TextView
+                            android:id="@+id/textFollolwing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="팔로잉"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="25dp"
+                        android:id="@+id/ic_add_post"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="onAir"
+                        android:src="@drawable/ic_stat_add" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/follow"
+                    android:layout_width="156dp"
+                    android:layout_height="18dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/follow_button"
+                    android:text="팔로우하기"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/unfollow"
+                    android:layout_width="156dp"
+                    android:layout_height="18dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/unfollow_button"
+                    android:text="팔로우 취소"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textEditProfile"
+                    android:layout_width="156dp"
+                    android:layout_height="18dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/grey_border"
+                    android:text="프로필 수정"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"

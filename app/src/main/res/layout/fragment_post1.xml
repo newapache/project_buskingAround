@@ -3,74 +3,142 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent">
+
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <fragment
-        android:id="@+id/mapPostPromote"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="70" />
-
-
-    <Button
-        android:id="@+id/btnSelectLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SelectLocation" />
-
     <ImageView
-        android:src="@drawable/chat"
+        android:layout_gravity="center"
+        android:src="@mipmap/addimage"
         android:id="@+id/postfragment1_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_margin="50dp"/>
+        android:layout_margin="30dp"/>
 
     <EditText
+        android:id="@+id/et_bTitle"
+        android:hint="공연 제목"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+
+    <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="postPrmt_title" />
+        android:hint="장르"/>
+
+
 
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/et_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="postPrmt_content" />
+        android:hint="내용 " />
 
-    <EditText
-        android:id="@+id/et_bTitle"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공연 날짜"
+                android:textColor="@color/black"/>
+
+            <DatePicker
+                android:id="@+id/datepicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="-30dp"
+                android:layout_marginLeft="-50dp"
+                android:layout_marginRight="-50dp"
+                android:layout_marginTop="-30dp"
+                android:layout_weight="1"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:scaleX="0.80"
+                android:scaleY="0.80"></DatePicker>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공연 시작 시간"
+                android:textColor="@color/black"/>
+
+            <TimePicker
+                android:id="@+id/timepicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:layout_marginBottom="-30dp"
+                android:layout_marginLeft="-50dp"
+                android:layout_marginRight="-50dp"
+                android:layout_marginTop="-30dp"
+                android:scaleX="0.80"
+                android:scaleY="0.80"
+                android:timePickerMode="spinner"></TimePicker>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <fragment
+        android:id="@+id/mapPostPromote"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="70" />
+
+        <TextView
+            android:id="@+id/tvSelectLocation"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#39000000"
+            android:gravity="center"
+            android:text="장소 정하기"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+</RelativeLayout>
+
+    <Button
+        android:id="@+id/btnSelectLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="postPrmt_bTitle" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/daypicker"/>
-
-    <DatePicker
-    android:id="@+id/datepicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:datePickerMode="spinner"></DatePicker>
-    <TimePicker
-        android:id="@+id/timepicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:timePickerMode="spinner"></TimePicker>
+        android:text="장소 정하기" />
 
     <Button
+        android:background="#fed053"
         android:id="@+id/btnCreatePost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,5 +146,6 @@ android:layout_height="match_parent">
 
 
 </LinearLayout>
+
 
 </ScrollView>

@@ -3,11 +3,18 @@
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <!--<ImageView-->
+        <!--android:id="@+id/stream_icon"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:src="@drawable/ic_launcher_background"-->
+        <!--android:adjustViewBounds="true"/>-->
+
+    <finalreport.mobile.dduwcom.myapplication.Utils.SquareImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/stream_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_launcher_background"/>
+        android:scaleType="centerCrop"/>
     <TextView
         android:text="제목"
         android:id="@+id/stream_title"

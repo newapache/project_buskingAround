@@ -12,14 +12,12 @@
             android:id="@+id/tvFollowers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="4dp"
             android:text="300"
 
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteX="48dp"
+            tools:layout_editor_absoluteY="8dp" />
 
         <TextView
             android:id="@+id/textFollowers"
@@ -36,14 +34,11 @@
             android:id="@+id/tvFollowing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="116dp"
-            android:layout_marginTop="4dp"
             android:text="400"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteX="238dp"
+            tools:layout_editor_absoluteY="8dp" />
 
         <TextView
             android:id="@+id/textFollolwing"
@@ -59,25 +54,28 @@
         <TextView
             android:id="@+id/follow"
             android:layout_width="156dp"
-            android:layout_height="17dp"
+            android:layout_height="18dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="57dp"
             android:background="@drawable/follow_button"
             android:text="팔로우하기"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textFollowers"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="29dp" />
+            app:layout_constraintEnd_toStartOf="@+id/textFollolwing"
+            app:layout_constraintStart_toEndOf="@+id/textFollowers"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/unfollow"
             android:layout_width="156dp"
-            android:layout_height="17dp"
+            android:layout_height="18dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="57dp"
             android:background="@drawable/unfollow_button"
             android:text="팔로우 취소"
             android:textAlignment="center"
@@ -88,18 +86,17 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textFollowers"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/textEditProfile"
             android:layout_width="156dp"
             android:layout_height="18dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="57dp"
             android:background="@drawable/grey_border"
-            android:text="Edit your profile"
+            android:text="프로필 수정"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -108,7 +105,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textFollowers"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
 

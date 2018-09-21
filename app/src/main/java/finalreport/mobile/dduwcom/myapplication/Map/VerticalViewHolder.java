@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import finalreport.mobile.dduwcom.myapplication.Utils.SquareImageView;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 /**
