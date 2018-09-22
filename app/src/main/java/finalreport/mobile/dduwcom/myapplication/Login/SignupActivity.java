@@ -46,9 +46,7 @@ public class SignupActivity extends AppCompatActivity{
         setContentView(R.layout.activity_signup);
         FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         splash_background = mFirebaseRemoteConfig.getString(getString(R.string.rc_color));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor(splash_background));
-        }
+
 
 
         profile = (ImageView)findViewById(R.id.signupActivity_imageview_profile);

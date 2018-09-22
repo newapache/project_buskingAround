@@ -1,57 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
 <LinearLayout
+    android:background="#f9eecc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <ImageView
         android:layout_gravity="center"
-        android:src="@mipmap/addimage"
+        android:src="@drawable/plus"
         android:id="@+id/postfragment1_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_margin="30dp"/>
 
     <EditText
+        android:layout_marginHorizontal="10dp"
         android:id="@+id/et_bTitle"
-        android:hint="공연 제목"
+        android:hint=" 공연 제목"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/edittext_rounded_corners"
         android:ems="10"
         android:inputType="textPersonName" />
 
 
     <EditText
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/edittext_rounded_corners"
         android:layout_marginTop="10dp"
         android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="장르"/>
+        android:hint=" 장르"/>
 
 
 
     <EditText
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/edittext_rounded_corners"
         android:layout_marginTop="10dp"
         android:id="@+id/et_content"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="내용 " />
+        android:hint=" 내용 " />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "/>
 
     <LinearLayout
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="#f9eecc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:backgroundTint="#f9eecc"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -81,6 +97,8 @@ android:layout_height="match_parent">
         </LinearLayout>
 
         <LinearLayout
+
+            android:backgroundTint="#e7cc8f"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -109,8 +127,12 @@ android:layout_height="match_parent">
     </LinearLayout>
 
     <RelativeLayout
+
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="#f9eecc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
     <fragment
         android:id="@+id/mapPostPromote"
         class="com.google.android.gms.maps.SupportMapFragment"
@@ -132,13 +154,16 @@ android:layout_height="match_parent">
 </RelativeLayout>
 
     <Button
+
+        android:layout_marginHorizontal="10dp"
         android:id="@+id/btnSelectLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="장소 정하기" />
 
     <Button
-        android:background="#fed053"
+
+        android:layout_marginHorizontal="10dp"
         android:id="@+id/btnCreatePost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

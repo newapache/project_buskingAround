@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="#f9eecc"
+    android:orientation="vertical">
 
 
     <ImageView
-        android:layout_gravity="center"
-        android:src="@mipmap/addimage"
         android:id="@+id/postfragment2_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="50dp"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_margin="50dp"
+        android:src="@drawable/plus" />
 
     <EditText
         android:id="@+id/et_Normtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/edittext_rounded_corners"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="제목"/>
+        android:hint="제목"
+        android:inputType="textPersonName" />
 
     <EditText
-        android:hint="내용"
-        android:layout_marginTop="10dp"
         android:id="@+id/et_Normcontent"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_rounded_corners"
         android:ems="10"
-        android:inputType="textPersonName"
-      />
-
-
+        android:hint="내용"
+        android:inputType="textPersonName" />
 
 
     <Button
-        android:background="#fed053"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="10dp"
         android:id="@+id/btnCreateNormPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
         android:text="일반 게시글 올리기" />
 
 

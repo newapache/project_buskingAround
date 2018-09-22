@@ -7,11 +7,13 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context="finalreport.mobile.dduwcom.myapplication.Login.SignupActivity"
+    android:background="#f9eecc"
     >
     <ImageView
         android:id="@+id/signupActivity_imageview_profile"
         android:layout_width="78dp"
         android:layout_height="101dp"
+        android:layout_marginBottom="40dp"
         android:src="@drawable/photo" />
 
 
@@ -20,8 +22,11 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:padding="10dp"
+            android:layout_marginHorizontal="70dp"
+            android:background="#ffffff"
             android:id="@+id/signupActivity_edittext_email"
-            android:layout_width="160dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="EMAIL" />
@@ -31,8 +36,11 @@
     android:layout_height="wrap_content">
 
     <EditText
+        android:padding="10dp"
+        android:layout_marginHorizontal="70dp"
+        android:background="#ffffff"
         android:id="@+id/signupActivity_edittext_name"
-        android:layout_width="88dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="NAME" />
@@ -44,8 +52,11 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:padding="10dp"
+            android:layout_marginHorizontal="70dp"
+            android:background="#ffffff"
             android:id="@+id/signupActivity_edittext_password"
-            android:layout_width="132dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="PASSWORD"
@@ -54,9 +65,12 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:layout_marginHorizontal="70dp"
         android:id="@+id/signupActivity_button_signup"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="SIGN UP" />
+        android:text="회원 가입" />
 
 </LinearLayout>

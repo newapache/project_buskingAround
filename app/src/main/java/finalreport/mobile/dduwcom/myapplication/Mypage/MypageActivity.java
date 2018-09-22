@@ -1,12 +1,17 @@
 package finalreport.mobile.dduwcom.myapplication.Mypage;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,7 +46,7 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
     private final int FRAGMENT2 = 2;
     private final int FRAGMENT3 = 3;
 
-    private ImageButton bt_tab1, bt_tab2, bt_tab3;
+    private Button bt_tab1, bt_tab2, bt_tab3;
 
     //
     private FirebaseAuth auth;
@@ -60,13 +65,16 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
+
+
+
         Intent intent = getIntent();
         user = (UserModel) intent.getSerializableExtra("user");
 
         // 위젯에 대한 참조
-        bt_tab1 = (ImageButton)findViewById(R.id.bt_tab1);
-        bt_tab2 = (ImageButton)findViewById(R.id.bt_tab2);
-        bt_tab3 = (ImageButton)findViewById(R.id.bt_tab3);
+        bt_tab1 = (Button)findViewById(R.id.bt_tab1);
+        bt_tab2 = (Button)findViewById(R.id.bt_tab2);
+        bt_tab3 = (Button)findViewById(R.id.bt_tab3);
         goBroadcast =(Button)findViewById(R.id.goBroadcast);
         watchBroadcast = (Button)findViewById(R.id.watchBroadcast);
 
@@ -370,4 +378,6 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
         }
 
     }
+
+
 }

@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/profileToolBar"
-            android:background="#A593E0">
+            android:background="#efaa52">
 
             <RelativeLayout
                 android:layout_width="match_parent"

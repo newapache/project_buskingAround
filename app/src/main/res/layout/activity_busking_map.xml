@@ -7,31 +7,23 @@
     tools:context="finalreport.mobile.dduwcom.myapplication.Map.BuskingMap"
     android:orientation="vertical">
 
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#A593E0">
+        android:background="#efaa52">
 
-        <TextView
 
-            android:textColor="#FFFFF3"
+        <ImageView
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:typeface="serif"
-            android:text="buskingAround"
-            />
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:id="@+id/filter_icon"
-            android:onClick="filterOnclick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:src="@drawable/filter_icon"/>
+            android:src="@drawable/buskpt"/>
+
 
     </android.support.v7.widget.Toolbar>
+
 
 
     //지도 넣을 자리
