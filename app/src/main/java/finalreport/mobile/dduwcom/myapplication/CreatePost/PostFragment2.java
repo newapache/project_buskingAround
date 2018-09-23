@@ -105,10 +105,7 @@ public class PostFragment2 extends Fragment{
         btnCreatePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(normImageUri == null){
-                    Toast.makeText(getActivity(), "사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
 
 
                 final PostNormal[] postNormal = new PostNormal[1];
@@ -118,6 +115,10 @@ public class PostFragment2 extends Fragment{
                         @SuppressWarnings("VisibleForTests")
                         String imageUrl = task.getResult().getDownloadUrl().toString();
                         if(imageUrl == null){
+                            Toast.makeText(getActivity(), "사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if(normImageUri == null){
                             Toast.makeText(getActivity(), "사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
                             return;
                         }

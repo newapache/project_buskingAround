@@ -44,14 +44,16 @@
 
 
     <EditText
+        android:inputType="textMultiLine"
         android:layout_marginHorizontal="10dp"
         android:background="@drawable/edittext_rounded_corners"
         android:layout_marginTop="10dp"
+        android:gravity="top"
         android:id="@+id/et_content"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:scrollHorizontally="false"
         android:hint=" 내용 " />
 
 

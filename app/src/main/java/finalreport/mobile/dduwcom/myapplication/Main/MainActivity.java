@@ -222,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
                 onAirposts.clear();
                 for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                     // child 내에 있는 데이터만큼 반복합니다.
-                    Log.d("빡친다", messageData.getKey());
 
                   for(DataSnapshot data : messageData.getChildren()) {
                         Stream stream = data.getValue(Stream.class);
@@ -288,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+            try{
             holder.icon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -295,7 +295,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("streamName", data.getStreamName()+ " live=1");
                     startActivity(intent);
                 }
-            });
+            });}catch (Exception e){
+                Toast.makeText(MainActivity.this, "방송연결중 오류가 났습니다.", Toast.LENGTH_SHORT).show();
+            }
 
         }
 

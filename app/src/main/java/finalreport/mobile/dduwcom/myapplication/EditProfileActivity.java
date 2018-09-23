@@ -87,6 +87,7 @@ public class EditProfileActivity extends AppCompatActivity{
                 Log.d(TAG, "onClick: attempting to save changes.");
                 saveProfileSettings();
                 Toast.makeText(EditProfileActivity.this, "바뀜", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
