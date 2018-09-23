@@ -60,6 +60,9 @@ public class Fragment2 extends Fragment{
 
 
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3,1);
+        mStaggeredGridLayoutManager.setReverseLayout(true);
+
+
         View view = inflater.inflate(R.layout.fragment_fragment2, container, false);
         mDatabase = FirebaseDatabase.getInstance();
         mGridview = (RecyclerView)view.findViewById(R.id.gridView1);

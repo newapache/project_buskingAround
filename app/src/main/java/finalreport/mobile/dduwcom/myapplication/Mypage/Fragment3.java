@@ -57,6 +57,8 @@ public class Fragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         View view = inflater.inflate(R.layout.fragment_fragment3, container, false);
         mDatabase = FirebaseDatabase.getInstance();
         mRecylcerView = (RecyclerView)view.findViewById(R.id.stream_list);

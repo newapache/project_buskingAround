@@ -267,7 +267,7 @@
         <Button
             android:layout_weight="1"
             android:id="@+id/bt_tab1"
-            android:layout_width="wrap_content"
+            android:layout_width="153dp"
             android:layout_height="wrap_content"
             android:text="홍보게시판"
              />
@@ -276,14 +276,14 @@
         <Button
             android:layout_weight="1"
             android:id="@+id/bt_tab2"
-            android:layout_width="wrap_content"
+            android:layout_width="153dp"
             android:layout_height="wrap_content"
             android:text="일반게시판"/>
 
         <Button
             android:layout_weight="1"
             android:id="@+id/bt_tab3"
-            android:layout_width="wrap_content"
+            android:layout_width="153dp"
             android:layout_height="wrap_content"
             android:text="다시보기"/>
 

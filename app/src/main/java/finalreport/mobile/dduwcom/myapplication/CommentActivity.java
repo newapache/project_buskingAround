@@ -179,16 +179,28 @@ public class CommentActivity extends AppCompatActivity {
         progressDialog.show();
         comment = new Comment();
         String path = FirebaseDatabase.getInstance().getReference().push().toString();
-        final String uid = path.substring(path.lastIndexOf("/") + 1);
+        final String cuid = path.substring(path.lastIndexOf("/") + 1);
 
         String etcomment = mComment.getText().toString();
 
 //        UserModel(String userName, String profileImageUrl, String uid)
 //        comment.setUser(new UserModel(mAuth.getCurrentUser().getuse, ));
-
-        comment.setUseruid(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        comment.setCommentId(uid);
+        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        comment.setUseruid(userid);
+        comment.setCommentId(cuid);
         comment.setComment(etcomment);
+        FirebaseDatabase.getInstance().getReference("users").child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               UserModel u = dataSnapshot.getValue(UserModel.class);
+                     comment.setUser(u);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy년 MM월 dd일", Locale.KOREA );
         Date currentTime = new Date ( );
         String dTime = formatter.format ( currentTime );
@@ -204,7 +216,7 @@ public class CommentActivity extends AppCompatActivity {
                         FirebaseDatabase.getInstance().getReference("/")
                                 .child("comments")
                                 .child(post.getNorm_postID())
-                                .child(uid)
+                                .child(cuid)
                                 .setValue(comment);
 
 
@@ -234,10 +246,10 @@ public class CommentActivity extends AppCompatActivity {
                                                 ArrayList<String> myRecordCollection;
                                                 if(mutableData.getValue() == null){
                                                     myRecordCollection = new ArrayList<String>(1);
-                                                    myRecordCollection.add(uid);
+                                                    myRecordCollection.add(cuid);
                                                 }else{
                                                     myRecordCollection = (ArrayList<String>) mutableData.getValue();
-                                                    myRecordCollection.add(uid);
+                                                    myRecordCollection.add(cuid);
                                                 }
 
                                                 mutableData.setValue(myRecordCollection);
@@ -290,27 +302,9 @@ public class CommentActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final CommentHolder holder, int position) {
 
-            //comment 추가시 사용자 이미지 다른거 저장되는 거 고쳐야함
-            FirebaseDatabase.getInstance().getReference("users").child(commentUsers.get(position)).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                        UserModel userModel = (UserModel)dataSnapshot.getValue(UserModel.class);
-
-                        Glide.with(holder.commentOwnerDisplay.getContext()).load(userModel.getProfileImageUrl()).into((holder).commentOwnerDisplay);
-                        holder.usernameTextView.setText(userModel.getUserName());
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
             Comment data = horizontalData.get(position);
-
+            holder.usernameTextView.setText(data.getUser().getUserName());
+            Glide.with(holder.commentOwnerDisplay.getContext()).load(data.getUser().getProfileImageUrl()).into((holder).commentOwnerDisplay);
             holder.timeTextView.setText(String.valueOf(data.getTimeCreated()));
             holder.commentTextView.setText(data.getComment());
 

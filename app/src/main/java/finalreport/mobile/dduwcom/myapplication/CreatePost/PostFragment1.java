@@ -807,11 +807,23 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
     private void createPostPromote(final String postPrmt_title, final String postPrmt_content,
                                    final String postPrmt_busking_title, final double postPrmt_busking_latitude, final double postPrmt_busking_longitude, final String date, final String time) {
 
+        if(imageUrl == null){
+            Toast.makeText(getActivity(), "사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(postPrmt_busking_latitude == 0|| postPrmt_busking_longitude == 0){
+            Toast.makeText(getActivity(), "장소를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         FirebaseStorage.getInstance().getReference().child("prmtPostImages").child(postPrmt_title).putFile(postImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 @SuppressWarnings("VisibleForTests")
                 String imageUrl= task.getResult().getDownloadUrl().toString();
+
+
+
                 String path = ref.push().toString();
                 String postId = path.substring(path.lastIndexOf("/") + 1);
 
@@ -833,6 +845,7 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
                 postPrmt.busking_date = date;
                 postPrmt.busking_time = time;
                 ref.child("post_promote").child(postId).setValue(postPrmt);
+
             }
 
         });

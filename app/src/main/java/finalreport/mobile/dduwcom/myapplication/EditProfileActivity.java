@@ -51,71 +51,10 @@ public class EditProfileActivity extends AppCompatActivity{
     private EditText mDisplayName, mUsername, mWebsite, mDescription, mEmail, mPhoneNumber;
     private TextView mChangeProfilePhoto;
     private CircleImageView mProfilePhoto;
-    private Uri imageUri;
+    public Uri imageUri;
 
     //vars
     private UserModel mUser ;
-//    public void onConfirmPassword(String password) {  Log.d(TAG, "onConfirmPassword: got the password: " + password);
-//
-//        // Get auth credentials from the user for re-authentication. The example below shows
-//        // email and password credentials but there are multiple possible providers,
-//        // such as GoogleAuthProvider or FacebookAuthProvider.
-//        AuthCredential credential = EmailAuthProvider
-//                .getCredential(mAuth.getCurrentUser().getEmail(), password);
-//
-//        ///////////////////// Prompt the user to re-provide their sign-in credentials
-//        mAuth.getCurrentUser().reauthenticate(credential)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if(task.isSuccessful()){
-//                            Log.d(TAG, "User re-authenticated.");
-//
-//                            ///////////////////////check to see if the email is not already present in the database
-//                            mAuth.fetchProvidersForEmail(mEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<ProviderQueryResult> task) {
-//                                    if(task.isSuccessful()){
-//                                        try{
-//                                            if(task.getResult().getProviders().size() == 1){
-//                                                Log.d(TAG, "onComplete: that email is already in use.");
-//                                                Toast.makeText(EditProfileActivity.this, "That email is already in use", Toast.LENGTH_SHORT).show();
-//                                            }
-//                                            else{
-//                                                Log.d(TAG, "onComplete: That email is available.");
-//
-//                                                //////////////////////the email is available so update it
-//                                                mAuth.getCurrentUser().updateEmail(mEmail.getText().toString())
-//                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                            @Override
-//                                                            public void onComplete(@NonNull Task<Void> task) {
-//                                                                if (task.isSuccessful()) {
-//                                                                    Log.d(TAG, "User email address updated.");
-//                                                                    Toast.makeText(EditProfileActivity.this,, "email updated", Toast.LENGTH_SHORT).show();
-//                                                                    mFirebaseMethods.updateEmail(mEmail.getText().toString());
-//                                                                }
-//                                                            }
-//                                                        });
-//                                            }
-//                                        }catch (NullPointerException e){
-//                                            Log.e(TAG, "onComplete: NullPointerException: "  +e.getMessage() );
-//                                        }
-//                                    }
-//                                }
-//                            });
-//
-//
-//
-//
-//
-//                        }else{
-//                            Log.d(TAG, "onComplete: re-authentication failed.");
-//                        }
-//
-//                    }
-//                });
-//
-//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +83,7 @@ public class EditProfileActivity extends AppCompatActivity{
         checkmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Log.d(TAG, "onClick: attempting to save changes.");
                 saveProfileSettings();
                 Toast.makeText(EditProfileActivity.this, "바뀜", Toast.LENGTH_SHORT).show();
@@ -153,9 +93,11 @@ public class EditProfileActivity extends AppCompatActivity{
     }
 
     private void saveProfileSettings(){
+
+
+
         final String username = mUsername.getText().toString();
         final String description = mDescription.getText().toString();
-
 
         //case1: if the user made a change to their username
         if(!mUser.getUserName().equals(username)){

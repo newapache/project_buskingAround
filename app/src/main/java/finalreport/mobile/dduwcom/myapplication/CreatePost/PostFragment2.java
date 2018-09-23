@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,6 +32,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import finalreport.mobile.dduwcom.myapplication.Models.PostNormal;
+import finalreport.mobile.dduwcom.myapplication.ReadPost.NormPostDetailActivity;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
 public class PostFragment2 extends Fragment{
@@ -103,13 +105,22 @@ public class PostFragment2 extends Fragment{
         btnCreatePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(normImageUri == null){
+                    Toast.makeText(getActivity(), "사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 
+                final PostNormal[] postNormal = new PostNormal[1];
                 FirebaseStorage.getInstance().getReference().child("normPostImages").child(et_title.getText().toString()).putFile(normImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         @SuppressWarnings("VisibleForTests")
                         String imageUrl = task.getResult().getDownloadUrl().toString();
+                        if(imageUrl == null){
+                            Toast.makeText(getActivity(), "사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         String path = FirebaseDatabase.getInstance().getReference().push().toString();
                         final String postId = path.substring(path.lastIndexOf("/") + 1);
@@ -117,32 +128,31 @@ public class PostFragment2 extends Fragment{
                         Date currentTime = new Date ( );
                         String dTime = formatter.format ( currentTime );
 
-                        PostNormal postNormal = new PostNormal();
-                        postNormal.norm_imageUrl = imageUrl;
-                        postNormal.norm_title = et_title.getText().toString();
-                        postNormal.norm_content = et_content.getText().toString();
-                        postNormal.norm_uid = auth.getCurrentUser().getUid();
-                        postNormal.norm_userId = auth.getCurrentUser().getEmail();
-                        postNormal.norm_postID = postId;
-                        postNormal.timeCreated = dTime;
+                        postNormal[0] = new PostNormal();
+                        postNormal[0].norm_imageUrl = imageUrl;
+                        postNormal[0].norm_title = et_title.getText().toString();
+                        postNormal[0].norm_content = et_content.getText().toString();
+                        postNormal[0].norm_uid = auth.getCurrentUser().getUid();
+                        postNormal[0].norm_userId = auth.getCurrentUser().getEmail();
+                        postNormal[0].norm_postID = postId;
+                        postNormal[0].timeCreated = dTime;
 
-                        ref.child("post_Normal").child(postId).setValue(postNormal);
+                        ref.child("post_Normal").child(postId).setValue(postNormal[0]);
+
 
 
                     }
                 });
 
 
-
-
             }
         });
-
 
 
         return view;
 
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

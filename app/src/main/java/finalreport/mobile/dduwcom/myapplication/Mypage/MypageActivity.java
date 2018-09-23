@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -314,38 +315,37 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
                 startActivity(intent1);
                 break;
             case R.id.watchBroadcast:
-                Intent intent2 =  new Intent(this,  streamPlayerActivity.class);
-                final String[] s = new String[1];
-                FirebaseDatabase.getInstance().getReference("stream").child(user.getUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot messageData : dataSnapshot.getChildren()) {
-                            // child 내에 있는 데이터만큼 반복합니다.
-                            Stream stream = (Stream) messageData.getValue(Stream.class);
-                            if(!stream.isStreaming) {
-                                s[0] = stream.getStreamName();
-                            }
-                        }
-                        dataSnapshot.getKey();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                Log.d("뭐지",s[0]);
                 try{
-                    Log.d("뭐지",s[0]);
-                    intent2.putExtra("streamName live=1",s[0]);
-                    startActivity(intent2);
+                        final Intent intent2 =  new Intent(this,  streamPlayerActivity.class);
+                        final String[] s = new String[1];
+                        FirebaseDatabase.getInstance().getReference("stream").child(user.getUid()).orderByChild("uid").equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                                    // child 내에 있는 데이터만큼 반복합니다.
+                                    Stream stream = (Stream) messageData.getValue(Stream.class);
+                                    Log.d("ㅠㅠㅠ", String.valueOf(stream));
+                                    if(String.valueOf(stream.isStreaming) == "true"){
+                                        intent2.putExtra("streamName",stream.getStreamName()+" live=1");
+                                        startActivity(intent2);
+
+                                    }
+
+                                }
+                                dataSnapshot.getKey();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+//                            Log.d("뭐지",s[0]);
+//                            intent2.putExtra("streamName live=1",s[0]+" live=1");
+//                    startActivity(intent2);
                 }
-                catch (RuntimeException e){
-                    AlertDialog dialog = new AlertDialog.Builder(this)
-                            .setMessage("방송중이 아닙니다.")
-                            .setPositiveButton("확인", null)
-                            .create();
-                    dialog.show();
+                catch (Exception e){
+                    Toast.makeText(this,"방송중이 아닙니다.", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.ic_add_post :

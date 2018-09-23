@@ -97,9 +97,13 @@ public class MainActivity extends AppCompatActivity {
 
         mLayoutManager1 = new LinearLayoutManager(this);
         mLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL); // 기본값이 VERTICAL
+        mLayoutManager1.setReverseLayout(true);
+        mLayoutManager1.setStackFromEnd(true);
 
         mLayoutManager2 = new LinearLayoutManager(this);
         mLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mLayoutManager2.setReverseLayout(true);
+        mLayoutManager2.setStackFromEnd(true);
 //
 //        mLayoutManager3 = new LinearLayoutManager(this);
 //        mLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -349,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, PrmtPostDetailActivity.class);
-                    intent.putExtra("detail",data);
+                    intent.putExtra("\"detail",data);
                     startActivity(intent);
 
                 }

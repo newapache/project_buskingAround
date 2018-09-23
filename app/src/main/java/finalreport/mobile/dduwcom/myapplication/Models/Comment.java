@@ -9,11 +9,20 @@ import java.io.Serializable;
 public class Comment implements Serializable {
     private UserModel user;
     private String useruid;
+    public String commenterImageUrl;
     private String commentId;
     private String timeCreated;
     private String comment;
 
     public Comment() {
+    }
+
+    public String getCommenterImageUrl() {
+        return commenterImageUrl;
+    }
+
+    public void setCommenterImageUrl(String commenterImageUrl) {
+        this.commenterImageUrl = commenterImageUrl;
     }
 
     public Comment(UserModel user, String commentId, String timeCreated, String comment) {

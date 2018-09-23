@@ -10,12 +10,15 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,12 +26,13 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.UploadTask;
 
 import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
 import io.antmedia.android.liveVideoBroadcaster.R;
 
-public class SignupActivity extends AppCompatActivity{
+public class SignupActivity extends AppCompatActivity implements OnFailureListener {
 
     private static final int PICK_FROM_ALBUM = 10;
     private EditText email;
@@ -64,15 +68,15 @@ public class SignupActivity extends AppCompatActivity{
         password = (EditText) findViewById(R.id.signupActivity_edittext_password);
         signup = (Button) findViewById(R.id.signupActivity_button_signup);
         signup.setBackgroundColor(Color.parseColor(splash_background));
-
-        try {
-            signup.setOnClickListener(new View.OnClickListener() {
+        signup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    if (email.getText().toString() == null || name.getText().toString() == null || password.getText().toString() == null) {
+                    if (imageUri == null || email.getText().toString() == null || name.getText().toString() == null || password.getText().toString() == null) {
+                        Toast.makeText(SignupActivity.this,"모든 양식을 채워주세요.", Toast.LENGTH_SHORT).show();
                         return;
                     }
+
 
 
                     FirebaseAuth.getInstance()
@@ -81,6 +85,7 @@ public class SignupActivity extends AppCompatActivity{
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     final String uid = task.getResult().getUser().getUid();
+
                                     FirebaseStorage.getInstance().getReference("/").child("userImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -110,13 +115,6 @@ public class SignupActivity extends AppCompatActivity{
                 }
             });
 
-        }catch (Exception e){
-            AlertDialog dialog = new AlertDialog.Builder(SignupActivity.this)
-                    .setMessage("동일한 이메일이 존재합니다.")
-                    .setPositiveButton("확인", null)
-                    .create();
-            dialog.show();
-        }
     }
 
     @Override
@@ -128,4 +126,10 @@ public class SignupActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onFailure(@NonNull Exception exception) {
+        int errorCode = ((StorageException) exception).getErrorCode();
+        String errorMessage = exception.getMessage();
+        Log.d("error", errorMessage);
+    }
 }

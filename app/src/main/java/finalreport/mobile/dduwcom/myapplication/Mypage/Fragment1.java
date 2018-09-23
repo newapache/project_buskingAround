@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import finalreport.mobile.dduwcom.myapplication.Models.BuskingData;
@@ -57,6 +58,8 @@ public class Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         View view = inflater.inflate(R.layout.fragment_fragment1, container, false);
         mDatabase = FirebaseDatabase.getInstance();
         mCardview = (RecyclerView)view.findViewById(R.id.cardview_list);
