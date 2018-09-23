@@ -86,10 +86,11 @@
         android:visibility="visible"
         >
         <EditText
+
             android:id="@+id/stream_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/stream_name"
+            android:hint="방송 제목"
             android:textAppearance="?android:textAppearanceMedium"
             />
         <Button
@@ -98,7 +99,7 @@
             android:layout_height="wrap_content"
             style="@style/Base.Widget.AppCompat.Button.Colored"
             android:textColor="@android:color/white"
-            android:text="@string/start_broadcasting"
+            android:text="방송 시작하기"
             android:onClick="toggleBroadcasting"
             android:layout_gravity="center_horizontal"
             android:textAppearance="?android:textAppearanceMedium"

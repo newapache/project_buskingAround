@@ -39,6 +39,7 @@ import finalreport.mobile.dduwcom.myapplication.Models.PostPromote;
 import finalreport.mobile.dduwcom.myapplication.Models.Stream;
 import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
 import finalreport.mobile.dduwcom.myapplication.Mypage.MypageActivity;
+import finalreport.mobile.dduwcom.myapplication.ReadPost.PrmtPostDetailActivity;
 import finalreport.mobile.dduwcom.myapplication.SearchActivity;
 import io.antmedia.android.liveVideoBroadcaster.R;
 import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
 
     android.support.v7.widget.Toolbar toolbar;
+
     private RecyclerView mHorizontalView1;
     private RecyclerView mHorizontalView2;
     private RecyclerView mHorizontalView3;
@@ -83,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);//액션바와 같게 만들어줌
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
 
 
         // RecyclerView binding
@@ -271,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                         // child 내에 있는 데이터만큼 반복합니다.
 
                         Glide.with(holder.icon.getContext()).load(messageData.getValue(UserModel.class).profileImageUrl).into((holder).icon);
-
+                        holder.busker.setText(messageData.getValue(UserModel.class).getUserName());
 
 
                     }
@@ -302,66 +303,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public String getImage(String uid){
-//        final String[] s = new String[1];
-//        FirebaseDatabase.getInstance().getReference().child("users").orderByChild("uid").equalTo(uid).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
-//                    // child 내에 있는 데이터만큼 반복합니다.
-//                    Log.d("빡친다", messageData.getKey());
-//
-//                    UserModel user = messageData.getValue(UserModel.class);
-//                    s[0] = user.getProfileImageUrl();
-//
-//                }
-//                dataSnapshot.getKey();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//        return s[0];
-//    }
-
-//    public static Bitmap retriveVideoFrameFromVideo(String videoPath)
-//            throws Throwable {
-//        Bitmap bitmap = null;
-//        MediaMetadataRetriever mediaMetadataRetriever = null;
-//        try {
-//            mediaMetadataRetriever = new MediaMetadataRetriever();
-//            if (Build.VERSION.SDK_INT >= 14)
-//                mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
-//            else
-//                mediaMetadataRetriever.setDataSource(videoPath);
-//
-//            bitmap = mediaMetadataRetriever.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            throw new Throwable(
-//                    "Exception in retriveVideoFrameFromVideo(String videoPath)"
-//                            + e.getMessage());
-//
-//        } finally {
-//            if (mediaMetadataRetriever != null) {
-//                mediaMetadataRetriever.release();
-//            }
-//        }
-//        return bitmap;
-//    }
-
     public class onAirViewHolder extends RecyclerView.ViewHolder{
 
 
         public ImageView icon;
         public TextView title;
-
+        public TextView busker;
         public onAirViewHolder(View itemView) {
             super(itemView);
             icon = (ImageView)itemView.findViewById(R.id.stream_icon);
             title = (TextView) itemView.findViewById(R.id.stream_title);
+            busker = (TextView) itemView.findViewById(R.id.stream_busker);
         }
 
     }
@@ -389,10 +341,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(HorizontalViewHolder holder, int position) {
-            PostPromote data = horizontalData.get(position);
+        public void onBindViewHolder(final HorizontalViewHolder holder, int position) {
+            final PostPromote data = horizontalData.get(position);
             holder.title.setText(data.getPostPrmt_busking_title());
             Glide.with(holder.icon.getContext()).load(data.getPostPrmt_imageUrl()).into((holder).icon);
+            holder.icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, PrmtPostDetailActivity.class);
+                    intent.putExtra("detail",data);
+                    startActivity(intent);
+
+                }
+            });
+            FirebaseDatabase.getInstance().getReference().child("users").orderByChild("uid").equalTo(data.postPrmt_uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    for(DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
+
+                        UserModel u = singleSnapshot.getValue(UserModel.class);
+                        holder.buskername.setText( u.getUserName());
+                    }
+
+
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
 
         }
 
@@ -408,11 +386,13 @@ public class MainActivity extends AppCompatActivity {
 
         public ImageView icon;
         public TextView title;
+        public TextView buskername;
 
         public HorizontalViewHolder(View itemView) {
             super(itemView);
             icon = (ImageView)itemView.findViewById(R.id.busking_icon);
             title = (TextView) itemView.findViewById(R.id.busking_title);
+            buskername = (TextView) itemView.findViewById(R.id.busking_busker);
         }
 
     }

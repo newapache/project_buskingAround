@@ -54,6 +54,7 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
     private TextView mypage_name,mDescription;
     private TextView mFollowers, mFollowing,  mFollow, mUnfollow;
     private ImageView mUserImage, maddPost;
+    private ImageView goHome;
     private TextView editProfile;
     private Button goBroadcast, watchBroadcast;
     private int mFollowersCount = 0;
@@ -77,6 +78,14 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
         bt_tab3 = (Button)findViewById(R.id.bt_tab3);
         goBroadcast =(Button)findViewById(R.id.goBroadcast);
         watchBroadcast = (Button)findViewById(R.id.watchBroadcast);
+
+        goHome = findViewById(R.id.gohome);
+        goHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         mFollowers = (TextView) findViewById(R.id.tvFollowers);
         mFollowing = (TextView) findViewById(R.id.tvFollowing);

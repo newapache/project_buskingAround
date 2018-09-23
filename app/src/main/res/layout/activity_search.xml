@@ -6,18 +6,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="#f9eecc">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/relLayout1">
+            android:id="@+id/relLayout1"
+           >
 
             <include layout="@layout/snippet_searchbar"/>
         </RelativeLayout>
 
 
         <ListView
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/listView"

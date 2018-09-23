@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +37,7 @@ public class SearchActivity extends AppCompatActivity {
     //widgets
     private EditText mSearchParam;
     private ListView mListView;
+    private ImageView backarrow;
 
     //vars
     private List<UserModel> mUserList;
@@ -48,6 +50,13 @@ public class SearchActivity extends AppCompatActivity {
 
         mSearchParam = (EditText) findViewById(R.id.search);
         mListView = (ListView) findViewById(R.id.listView);
+        backarrow = (ImageView) findViewById(R.id.back);
+        backarrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         hideSoftKeyboard();
         initTextListener();

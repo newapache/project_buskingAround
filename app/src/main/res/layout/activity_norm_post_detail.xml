@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context="finalreport.mobile.dduwcom.myapplication.ReadPost.NormPostDetailActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efaa52">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_backarrow"
+            android:id="@+id/goback"
+            />
+
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/gui7"/>
+
+
+    </android.support.v7.widget.Toolbar>
 
         <ScrollView
             android:layout_below="@+id/toolbar"
@@ -88,32 +110,24 @@
                         android:layout_below="@+id/post_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Liked by Mitch, Tom, Mohammed and 30 others"
+                        android:text="buskingAround, yun 외 2명이 좋아합니다."
                         android:textSize="18sp"
                         android:id="@+id/image_likes"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="mitch.tabian moutains #earthporn #mountains"
-                        android:textSize="18sp"
-                        android:id="@+id/image_caption"
-                        android:layout_below="@+id/image_likes"
-                        android:layout_marginTop="15dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="View all 3 comments"
+                        android:text="3개의 댓글"
                         android:textSize="18sp"
-                        android:layout_below="@+id/image_caption"
+                        android:layout_below="@+id/image_likes"
                         android:id="@+id/image_comments_link"
                         android:layout_marginTop="15dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3 DAYS AGO"
+                        android:text="3일전"
                         android:textSize="18sp"
                         android:layout_below="@+id/image_comments_link"
                         android:id="@+id/image_time_posted"

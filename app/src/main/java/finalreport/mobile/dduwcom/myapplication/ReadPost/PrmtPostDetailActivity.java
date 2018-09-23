@@ -34,8 +34,8 @@ public class PrmtPostDetailActivity extends AppCompatActivity {
     private PostPromote p;
     //widgets
     private SquareImageView mPostImage;
-    private TextView mBackLabel, mCaption, mUsername, mTimestamp, mLikes, mComments, mcontent;
-    private ImageView mBackArrow, mEllipses, mHeartRed, mHeartWhite, mProfileImage, mComment;
+    private TextView mBackLabel, mCaption, mUsername, mTimestamp, mLikes, mComments, mcontent, mwhen, mwhere;
+    private ImageView mBackArrow, mEllipses, mHeartRed, mHeartWhite, mProfileImage, mComment, goback;
 
 
     @Override
@@ -56,7 +56,15 @@ public class PrmtPostDetailActivity extends AppCompatActivity {
         mComment = (ImageView) findViewById(R.id.speech_bubble);
         mComments = (TextView) findViewById(R.id.image_comments_link);
         mcontent = (TextView) findViewById(R.id.post_content);
-
+        goback = (ImageView) findViewById(R.id.goback);
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        mwhen = (TextView) findViewById(R.id.post_when);
+        mwhere = (TextView) findViewById(R.id.post_where);
         mHeart = new Heart(mHeartWhite, mHeartRed);
 
         final PostPromote post;
@@ -69,6 +77,8 @@ public class PrmtPostDetailActivity extends AppCompatActivity {
 
         Glide.with(mPostImage.getContext()).load(post.getPostPrmt_imageUrl()).into(mPostImage);
         mcontent.setText(post.getPostPrmt_content());
+        mwhen.setText(post.getBusking_date()+" "+post.busking_time);
+        mwhere.setText("홍대 놀이터");
 
         if (post.stars.containsKey(auth.getCurrentUser().getUid())) {
             // Unstar the post and remove self from stars

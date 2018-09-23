@@ -194,7 +194,6 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
         et_bTitle = (EditText)view.findViewById(R.id.et_bTitle);
         iv_postImg = view.findViewById(R.id.postfragment1_image);
         btnCreatePost = (Button)view.findViewById(R.id.btnCreatePost);
-        tvSelectLocation = (TextView) view.findViewById(R.id.tvSelectLocation);
         btnSelectLocation = (Button)view.findViewById(R.id.btnSelectLocation);
         mDate = (DatePicker) view.findViewById(R.id.datepicker);
 
@@ -218,21 +217,6 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
         });
 
         btnSelectLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
-                try {
-                    Intent intent = intentBuilder.build(getActivity());
-                    startActivityForResult(intent,PLACE_PICKER_REQUEST);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        tvSelectLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();

@@ -33,7 +33,7 @@ public class NormPostDetailActivity extends AppCompatActivity {
     //widgets
     private SquareImageView mPostImage;
     private TextView mBackLabel, mCaption, mUsername, mTimestamp, mLikes, mComments, mcontent;
-    private ImageView mBackArrow, mEllipses, mHeartRed, mHeartWhite, mProfileImage, mComment;
+    private ImageView mBackArrow, mEllipses, mHeartRed, mHeartWhite, mProfileImage, mComment,goback;
 
 
     @Override
@@ -54,6 +54,13 @@ public class NormPostDetailActivity extends AppCompatActivity {
         mComment = (ImageView) findViewById(R.id.speech_bubble);
         mComments = (TextView) findViewById(R.id.image_comments_link);
         mcontent = (TextView) findViewById(R.id.post_content);
+        goback = (ImageView) findViewById(R.id.goback);
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         mHeart = new Heart(mHeartWhite, mHeartRed);
 

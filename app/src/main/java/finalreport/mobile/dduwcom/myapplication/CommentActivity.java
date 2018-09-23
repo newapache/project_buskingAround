@@ -25,7 +25,10 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import finalreport.mobile.dduwcom.myapplication.Models.Comment;
@@ -42,7 +45,7 @@ public class CommentActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     PostNormal post;
     //widgets
-    private ImageView mBackArrow, mCheckMark;
+    private ImageView mBackArrow, mCheckMark, goback;
     private EditText mComment;
     private Context mContext;
 
@@ -69,7 +72,13 @@ public class CommentActivity extends AppCompatActivity {
         mComment = (EditText) findViewById(R.id.comment);
         mComments = new ArrayList<>();
         mContext = this;
-
+        goback = findViewById(R.id.backArrow);
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         initCommentSection();
 
 
@@ -180,7 +189,10 @@ public class CommentActivity extends AppCompatActivity {
         comment.setUseruid(FirebaseAuth.getInstance().getCurrentUser().getUid());
         comment.setCommentId(uid);
         comment.setComment(etcomment);
-        comment.setTimeCreated(System.currentTimeMillis());
+        SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy년 MM월 dd일", Locale.KOREA );
+        Date currentTime = new Date ( );
+        String dTime = formatter.format ( currentTime );
+        comment.setTimeCreated(dTime);
 
         FirebaseDatabase.getInstance()
                 .getReference("users")

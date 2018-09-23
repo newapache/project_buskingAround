@@ -2,65 +2,72 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <!--<ImageView-->
-            <!--android:id="@+id/vertical_icon"-->
-            <!--android:src="@mipmap/ic_launcher"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="100dp" />-->
-
-        <finalreport.mobile.dduwcom.myapplication.Utils.SquareImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+        <ImageView
             android:id="@+id/vertical_icon"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"/>
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"/>
+
+        <!--<finalreport.mobile.dduwcom.myapplication.Utils.SquareImageView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:id="@+id/vertical_icon"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:adjustViewBounds="true"/>-->
 
 
     </LinearLayout>
     <LinearLayout
+        android:layout_marginLeft="10dp"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        
+
         <TextView
             android:id="@+id/vertical_title"
+            android:textColor="@color/black"
+            android:textSize="20dp"
             android:text="공연이름"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/busking_title"
+            android:layout_marginTop="15dp"
+            android:id="@+id/whobusk"
             android:text="공연자"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <!--<TextView-->
-            <!--android:id="@+id/vertical_genre"-->
-            <!--android:text="장르"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
+        <!--android:id="@+id/vertical_genre"-->
+        <!--android:text="장르"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
         <!--<TextView-->
-            <!--android:id="@+id/vertical_time"-->
-            <!--android:text="시간"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
+        <!--android:id="@+id/vertical_time"-->
+        <!--android:text="시간"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/vertical_location"
             android:text="내 위치로부터 거리"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/vertical_time"
             android:text="시간"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
 
 </LinearLayout>

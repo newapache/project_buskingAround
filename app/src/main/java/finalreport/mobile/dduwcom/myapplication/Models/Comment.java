@@ -10,13 +10,13 @@ public class Comment implements Serializable {
     private UserModel user;
     private String useruid;
     private String commentId;
-    private long timeCreated;
+    private String timeCreated;
     private String comment;
 
     public Comment() {
     }
 
-    public Comment(UserModel user, String commentId, long timeCreated, String comment) {
+    public Comment(UserModel user, String commentId, String timeCreated, String comment) {
 
         this.user = user;
         this.commentId = commentId;
@@ -49,11 +49,11 @@ public class Comment implements Serializable {
         this.commentId = commentId;
     }
 
-    public long getTimeCreated() {
+    public String getTimeCreated() {
         return timeCreated;
     }
 
-    public void setTimeCreated(long timeCreated) {
+    public void setTimeCreated(String timeCreated) {
         this.timeCreated = timeCreated;
     }
 

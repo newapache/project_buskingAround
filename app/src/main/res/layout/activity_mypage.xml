@@ -13,6 +13,13 @@
         android:layout_height="wrap_content"
         android:background="#efaa52">
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/home2"
+            android:id="@+id/gohome"
+            />
+
 
         <ImageView
             android:layout_gravity="center"
@@ -121,10 +128,11 @@
 
             <TextView
                 android:id="@+id/follow"
-                android:layout_width="156dp"
-                android:layout_height="18dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
+                android:layout_marginStart="46dp"
                 android:background="@drawable/follow_button"
                 android:text="팔로우하기"
                 android:textAlignment="center"
@@ -133,11 +141,11 @@
 
             <TextView
                 android:id="@+id/unfollow"
-                android:layout_width="156dp"
-                android:layout_height="18dp"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="46dp"
                 android:background="@drawable/unfollow_button"
                 android:text="팔로우 취소"
                 android:textAlignment="center"

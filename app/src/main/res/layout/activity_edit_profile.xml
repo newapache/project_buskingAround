@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f9eecc"
+    android:backgroundTint="#f9eecc"
     tools:context="finalreport.mobile.dduwcom.myapplication.EditProfileActivity">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -14,7 +16,8 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/profileToolBar">
+        android:id="@+id/profileToolBar"
+        android:background="#efaa52">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="Edit Profile"
+                android:text="프로필 수정"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:layout_marginStart="5dp"
@@ -61,215 +64,62 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:padding="20dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/changeProfilePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_photo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="프로필 사진 바꾸기"
+            android:textColor="@color/link_blue"
+            android:textSize="16sp" />
+
+
+            <EditText
+                android:layout_below="@+id/changeProfilePhoto"
+                android:layout_marginTop="50dp"
+                android:id="@+id/username"
+                android:hint="닉네임"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="20dp">
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/edittext_rounded_corners"
+                android:ems="10"
+                android:inputType="textPersonName" />
 
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:id="@+id/profile_photo"
-                    android:layout_marginTop="20dp"
-                    app:civ_border_color="@color/black"
-                    app:civ_border_width="2dp"
-                    android:layout_centerHorizontal="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="프로필 사진 바꾸기"
-                    android:id="@+id/changeProfilePhoto"
-                    android:layout_below="@+id/profile_photo"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/link_blue"
-                    android:textSize="16sp"/>
+            <EditText
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/username"
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/edittext_rounded_corners"
+                android:hint="소개글"
+                android:inputType="textNoSuggestions" />
 
 
 
-                <!-- username section -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/changeProfilePhoto"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/grey_border_bottom"
-                    android:id="@+id/relLayout1">
-
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_username"
-                        android:layout_centerVertical="true"/>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/username"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="40dp"
-                        android:background="@null"
-                        android:inputType="textNoSuggestions"
-                        android:hint="이름"/>
-
-                </RelativeLayout>
-
-
-                <!--&lt;!&ndash; display_name section &ndash;&gt;-->
-                <!--<RelativeLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:layout_below="@+id/relLayout1"-->
-                    <!--android:background="@drawable/grey_border_bottom"-->
-                    <!--android:id="@+id/relLayout2"-->
-                    <!--android:layout_marginTop="15dp">-->
-
-                    <!--<ImageView-->
-                        <!--android:layout_width="35dp"-->
-                        <!--android:layout_height="35dp"-->
-                        <!--android:src="@drawable/ic_display_name"-->
-                        <!--android:layout_centerVertical="true"/>-->
-
-                    <!--<EditText-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:id="@+id/display_name"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginStart="40dp"-->
-                        <!--android:background="@null"-->
-                        <!--android:inputType="textNoSuggestions"-->
-                        <!--android:hint="display name"/>-->
-
-                <!--</RelativeLayout>-->
-
-
-                <!--&lt;!&ndash; website section &ndash;&gt;-->
-                <!--<RelativeLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:layout_below="@+id/relLayout2"-->
-                    <!--android:background="@drawable/grey_border_bottom"-->
-                    <!--android:id="@+id/relLayout3"-->
-                    <!--android:layout_marginTop="15dp">-->
-
-                    <!--<ImageView-->
-                        <!--android:layout_width="35dp"-->
-                        <!--android:layout_height="35dp"-->
-                        <!--android:src="@drawable/ic_web"-->
-                        <!--android:layout_centerVertical="true"/>-->
-
-                    <!--<EditText-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:id="@+id/website"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginStart="40dp"-->
-                        <!--android:background="@null"-->
-                        <!--android:inputType="textNoSuggestions"-->
-                        <!--android:hint="Website"/>-->
-
-                <!--</RelativeLayout>-->
-
-
-                <!-- description section -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/relLayout1"
-                    android:background="@drawable/grey_border_bottom"
-                    android:id="@+id/relLayout4"
-                    android:layout_marginTop="15dp">
-
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_description"
-                        android:layout_centerVertical="true"/>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/description"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="40dp"
-                        android:background="@null"
-                        android:inputType="textNoSuggestions"
-                        android:hint="소개글"/>
-
-                </RelativeLayout>
-
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textSize="25sp"-->
-                    <!--android:text="PRIVATE INFORMATION"-->
-                    <!--android:layout_below="@id/relLayout4"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_marginTop="50dp"-->
-                    <!--android:textColor="@color/black"-->
-                    <!--android:background="@drawable/grey_border_bottom"-->
-                    <!--android:id="@+id/textPrivateInfo"/>-->
-
-
-                <!-- email section -->
-                <!--<RelativeLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:layout_below="@+id/textPrivateInfo"-->
-                    <!--android:background="@drawable/grey_border_bottom"-->
-                    <!--android:id="@+id/relLayout5"-->
-                    <!--android:layout_marginTop="15dp">-->
-
-                    <!--<ImageView-->
-                        <!--android:layout_width="35dp"-->
-                        <!--android:layout_height="35dp"-->
-                        <!--android:src="@drawable/ic_email"-->
-                        <!--android:layout_centerVertical="true"/>-->
-
-                    <!--<EditText-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:id="@+id/email"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginStart="40dp"-->
-                        <!--android:background="@null"-->
-                        <!--android:inputType="textNoSuggestions"-->
-                        <!--android:hint="Email"/>-->
-
-                <!--</RelativeLayout>-->
-
-                <!-- phone number section -->
-                <!--<RelativeLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:layout_below="@+id/relLayout5"-->
-                    <!--android:background="@drawable/grey_border_bottom"-->
-                    <!--android:id="@+id/relLayout6"-->
-                    <!--android:layout_marginTop="15dp">-->
-
-                    <!--<ImageView-->
-                        <!--android:layout_width="35dp"-->
-                        <!--android:layout_height="35dp"-->
-                        <!--android:src="@drawable/ic_phone"-->
-                        <!--android:layout_centerVertical="true"/>-->
-
-                    <!--<EditText-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:id="@+id/phoneNumber"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginStart="40dp"-->
-                        <!--android:background="@null"-->
-                        <!--android:inputType="textNoSuggestions"-->
-                        <!--android:hint="Phone Number"/>-->
-
-                <!--</RelativeLayout>-->
-
-            </RelativeLayout>
-
-
-        </ScrollView>
+    </RelativeLayout>
 </RelativeLayout>
