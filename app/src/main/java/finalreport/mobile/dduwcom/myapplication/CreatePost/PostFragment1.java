@@ -274,9 +274,9 @@ public class PostFragment1 extends Fragment implements OnMapReadyCallback,
             public void onTimeChanged(TimePicker timePicker, int hour, int min) {
 
                 if (hour >= 12)
-                    time = "오후 "+ hour+"시 "+min+"분";
+                    time = "오후 "+ (hour -12)+"시 "+min+"분";
                 else
-                    time = "오전"+ hour+"시 "+min+"분";
+                    time = "오전 "+ hour+"시 "+min+"분";
 
 
             }

@@ -21,6 +21,7 @@ public class VerticalViewHolder extends RecyclerView.ViewHolder implements View.
     /*public TextView genre;
     public TextView time;*/
     public TextView distance;
+    public TextView date;
     public TextView time;
     private ItemClickListener itemClickListener;
     public VerticalViewHolder(View itemView) {
@@ -31,6 +32,7 @@ public class VerticalViewHolder extends RecyclerView.ViewHolder implements View.
         /*genre = (TextView) itemView.findViewById(R.id.vertical_genre);
         time = (TextView) itemView.findViewById(R.id.vertical_time);*/
         distance = (TextView) itemView.findViewById(R.id.vertical_location);
+        date = (TextView) itemView.findViewById(R.id.vertical_date);
         time = (TextView) itemView.findViewById(R.id.vertical_time);
 
         itemView.setOnClickListener(this);

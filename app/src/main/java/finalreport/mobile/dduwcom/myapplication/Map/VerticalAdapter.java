@@ -4,6 +4,7 @@ package finalreport.mobile.dduwcom.myapplication.Map;
 
         import android.content.Intent;
         import android.support.v7.widget.RecyclerView;
+        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -77,8 +78,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalViewHolder>{
 
             }
         });
-        holder.distance.setText(String.valueOf(postPrmt.postPrmt_distance) + "m");
-        holder.time.setText(postPrmt.busking_date+" "+postPrmt.busking_time+ "에 시작");
+        String[] s = (String.valueOf(postPrmt.postPrmt_distance)).split("\\.");
+        holder.distance.setText(s[0] + "m");
+        holder.date.setText(postPrmt.busking_date);
+        holder.time.setText(postPrmt.busking_time);
         Glide.with(holder.icon.getContext()).load(postPrmt.getPostPrmt_imageUrl()).into(holder.icon);
 
         holder.setItemClickListener(new ItemClickListener() {
