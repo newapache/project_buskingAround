@@ -485,7 +485,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, PrmtPostDetailActivity.class);
-                    intent.putExtra("\"detail",data);
+                    intent.putExtra("detail",data);
                     startActivity(intent);
 
                 }
