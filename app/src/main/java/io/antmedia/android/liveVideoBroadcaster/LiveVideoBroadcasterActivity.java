@@ -25,6 +25,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -32,21 +35,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import finalreport.mobile.dduwcom.myapplication.Models.ChatModel;
 import finalreport.mobile.dduwcom.myapplication.Models.Stream;
+import finalreport.mobile.dduwcom.myapplication.Models.UserModel;
 import io.antmedia.android.broadcaster.ILiveVideoBroadcaster;
 import io.antmedia.android.broadcaster.LiveVideoBroadcaster;
 import io.antmedia.android.broadcaster.utils.Resolution;
@@ -70,6 +82,13 @@ public class LiveVideoBroadcasterActivity extends AppCompatActivity {
     private ILiveVideoBroadcaster mLiveVideoBroadcaster;
     private Button mBroadcastControlButton;
 
+    private EditText messagecontent;
+    private Button sendmessage;
+    private String uid;
+    private String chatRoomUid;
+    private RecyclerView recyclerView;
+
+    private String streamName;
     Stream stream;
 
     /** Defines callbacks for service binding, passed to bindService() */
@@ -116,6 +135,14 @@ public class LiveVideoBroadcasterActivity extends AppCompatActivity {
         mRootView = (ViewGroup)findViewById(R.id.root_layout);
         mSettingsButton = (ImageButton)findViewById(R.id.settings_button);
         mStreamLiveStatus = (TextView) findViewById(R.id.stream_live_status);
+
+
+        messagecontent = (EditText) findViewById(R.id.messageActivity_editText);
+        sendmessage = (Button)findViewById(R.id.messageActivity_button);
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+
 
         mBroadcastControlButton = (Button) findViewById(R.id.toggle_broadcasting);
 
@@ -301,6 +328,34 @@ public class LiveVideoBroadcasterActivity extends AppCompatActivity {
             else {
                 Snackbar.make(mRootView, R.string.oopps_shouldnt_happen, Snackbar.LENGTH_LONG).show();
             }
+
+
+
+            //changetext.setText("ddododododo");
+            final ChatModel chatModel = new ChatModel();
+            chatModel.users.put(uid,true);
+            chatModel.livetitle = streamName;
+            checkChatRoom();
+            if(chatRoomUid == null){
+                FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel);
+                chatModel.livetitle = streamName;
+                //checkChatRoom();
+            }
+
+
+            recyclerView = (RecyclerView)findViewById(R.id.messageActivity_reclclerview);
+
+            sendmessage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ChatModel.Comment comment = new ChatModel.Comment();
+                    comment.uid = uid;
+                    comment.message = messagecontent.getText().toString();
+                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").push().setValue(comment);
+                    messagecontent.setText("");
+                }
+            });
+
         }
         else
         {
@@ -408,4 +463,159 @@ public class LiveVideoBroadcasterActivity extends AppCompatActivity {
 
         return String.valueOf(number);
     }
+
+
+    void  checkChatRoom(){
+
+        FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot item : dataSnapshot.getChildren()){
+                    ChatModel  chatModel = item.getValue(ChatModel.class);
+
+                    if(chatModel.users.containsKey(uid)){
+                        chatRoomUid = item.getKey();  // 방 아이디를 가져옴 -> 후에 여기에 코멘츠들을 삽입
+                        recyclerView.setLayoutManager(new LinearLayoutManager(LiveVideoBroadcasterActivity.this));
+                        recyclerView.setAdapter(new RecyclerViewAdapter());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+
+        List<ChatModel.Comment> comments;
+        UserModel userModel;
+        public RecyclerViewAdapter() {
+            comments = new ArrayList<>();
+
+            FirebaseDatabase.getInstance().getReference().child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    userModel = dataSnapshot.getValue(UserModel.class);
+                    getMessageList();
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+
+        }
+
+        void getMessageList(){
+            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    comments.clear();
+
+                    for(DataSnapshot item : dataSnapshot.getChildren()){
+                        comments.add(item.getValue(ChatModel.Comment.class));
+                    }
+
+                    notifyDataSetChanged();
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message,parent,false);
+
+
+            return new MessageViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+            MessageViewHolder messageViewHolder = ((MessageViewHolder)holder);
+
+
+
+            if(comments.get(position).uid.equals(uid)){
+                messageViewHolder.textView_message.setText(comments.get(position).message);
+                messageViewHolder.textView_message.setBackgroundResource(R.drawable.rightbubble);
+                messageViewHolder.linearLayout_destination.setVisibility(View.INVISIBLE);
+                messageViewHolder.textView_message.setTextSize(10);
+
+            }else {
+
+                Glide.with(holder.itemView.getContext())
+                        .load(userModel.profileImageUrl)
+                        .apply(new RequestOptions().circleCrop())
+                        .into(messageViewHolder.imageView_profile);
+                messageViewHolder.textview_name.setText(userModel.userName);
+                messageViewHolder.linearLayout_destination.setVisibility(View.VISIBLE);
+                messageViewHolder.textView_message.setBackgroundResource(R.drawable.leftbubble);
+                messageViewHolder.textView_message.setText(comments.get(position).message);
+                messageViewHolder.textView_message.setTextSize(10);
+
+
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return comments.size();
+        }
+
+        private class MessageViewHolder extends RecyclerView.ViewHolder {
+            public TextView textView_message;
+            public TextView textview_name;
+            public ImageView imageView_profile;
+            public LinearLayout linearLayout_destination;
+
+            public MessageViewHolder(View view) {
+                super(view);
+                textView_message = (TextView) view.findViewById(R.id.messageItem_textView_message);
+                textview_name = (TextView)view.findViewById(R.id.messageItem_textview_name);
+                imageView_profile = (ImageView)view.findViewById(R.id.messageItem_imageview_profile);
+                linearLayout_destination = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_destination);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 }
