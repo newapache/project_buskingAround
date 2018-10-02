@@ -1,6 +1,7 @@
 package finalreport.mobile.dduwcom.myapplication.Mypage;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +31,10 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.io.EOFException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
+import finalreport.mobile.dduwcom.myapplication.BuyHeartActivity;
 import finalreport.mobile.dduwcom.myapplication.CreatePost.MakePost;
 import finalreport.mobile.dduwcom.myapplication.EditProfileActivity;
 import finalreport.mobile.dduwcom.myapplication.Models.PostNormal;
@@ -54,7 +59,7 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
 
     private TextView mypage_name,mDescription;
     private TextView mFollowers, mFollowing,  mFollow, mUnfollow;
-    private ImageView mUserImage, maddPost;
+    private ImageView mUserImage, maddPost, addheart;
     private ImageView goHome;
     private TextView editProfile;
     private Button goBroadcast, watchBroadcast;
@@ -85,6 +90,15 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        addheart = findViewById(R.id.addheart);
+        addheart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MypageActivity.this, BuyHeartActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -209,6 +223,8 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
         maddPost.setVisibility(View.GONE);
         watchBroadcast.setVisibility(View.VISIBLE);
         goBroadcast.setVisibility(View.GONE);
+        addheart.setVisibility(View.GONE);
+
         getFollowingCount();
         getFollowersCount();
     }
@@ -221,6 +237,7 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
         maddPost.setVisibility(View.GONE);
         watchBroadcast.setVisibility(View.VISIBLE);
         goBroadcast.setVisibility(View.GONE);
+        addheart.setVisibility(View.GONE);
         getFollowingCount();
         getFollowersCount();
     }
@@ -231,6 +248,7 @@ import io.antmedia.android.liveVideoPlayer.streamPlayerActivity;
         editProfile.setVisibility(View.VISIBLE);
         watchBroadcast.setVisibility(View.GONE);
         goBroadcast.setVisibility(View.VISIBLE);
+        addheart.setVisibility(View.VISIBLE);
 
     }
 

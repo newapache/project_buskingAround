@@ -15,18 +15,23 @@
  */
 package io.antmedia.android.liveVideoPlayer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +76,9 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 
+import finalreport.mobile.dduwcom.myapplication.BuyHeartActivity;
+import finalreport.mobile.dduwcom.myapplication.CustomDialog;
+import finalreport.mobile.dduwcom.myapplication.SupportCustomDialog;
 import io.antmedia.android.liveVideoBroadcaster.R;
 import io.antmedia.android.liveVideoPlayer.DefaultExtractorsFactoryForFLV;
 import io.antmedia.android.liveVideoPlayer.EventLogger;
@@ -99,6 +107,9 @@ public class streamPlayerActivity extends AppCompatActivity implements OnClickLi
   private LinearLayout debugRootView;
   private TextView debugTextView;
   private Button retryButton;
+
+  //후원하기 버튼
+  private ImageView supportImage;
 
   private DataSource.Factory mediaDataSourceFactory;
   private SimpleExoPlayer player;
@@ -143,6 +154,9 @@ public class streamPlayerActivity extends AppCompatActivity implements OnClickLi
     debugTextView = (TextView) findViewById(R.id.debug_text_view);
     retryButton = (Button) findViewById(R.id.retry_button);
     retryButton.setOnClickListener(this);
+
+    supportImage = (ImageView) findViewById(R.id.support);
+    supportImage.setOnClickListener(this);
 
 //    videoNameEditText = (EditText) findViewById(R.id.video_name_edit_text);
     videoStartControlLayout = findViewById(R.id.video_start_control_layout);
@@ -206,6 +220,48 @@ public class streamPlayerActivity extends AppCompatActivity implements OnClickLi
   public void onClick(View view) {
     if (view == retryButton) {
       play();
+    }
+
+    if(view == supportImage) {
+//      AlertDialog.Builder ad = new AlertDialog.Builder(this);
+//      ad.setTitle("후원하기");       // 제목 설정
+//      ad.setMessage("하트를 후원하시겠어요?");   // 내용 설정
+//// EditText 삽입하기
+//      final EditText et = new EditText(this);
+//      et.setHint("후원할 하트갯수");
+//      ad.setView(et);
+//// 확인 버튼 설정
+//      ad.setPositiveButton("후원하기", new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//          Log.v("yes", "Yes Btn Click");
+//          // Text 값 받아서 로그 남기기
+//          String value = et.getText().toString();
+//          Log.v("yes", value);
+//          dialog.dismiss();     //닫기
+//          // Event
+//
+//          Toast.makeText(streamPlayerActivity.this, value +"개 후원했습니다!", Toast.LENGTH_SHORT).show();
+//        }
+//      });
+//
+//// 취소 버튼 설정
+//      ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//          Log.v("no","No Btn Click");
+//          dialog.dismiss();     //닫기
+//          // Event
+//        }
+//      });
+//
+//// 창 띄우기
+//      ad.show();
+
+      SupportCustomDialog customDialog = new SupportCustomDialog(streamPlayerActivity.this);
+      customDialog.callFunction();
+
+
     }
   }
 
