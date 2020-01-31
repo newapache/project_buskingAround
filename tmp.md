@@ -11,6 +11,10 @@
 
 
 
+<p align="center">
+  <img width="460" height="300" src="/images/view1.png">
+</p>
+
 ![](/images/view1.png)
 ![](/images/view2.png)
 ![](/images/view3.png)
