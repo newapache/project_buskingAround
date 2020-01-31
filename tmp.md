@@ -60,23 +60,23 @@
 
 <table>
  
-<tbody>
+<tbody align="center">
 <tr>
  <th align="center">Server-Side</th>
 <td align="center">Ubuntu Server 16.04 LTS(AWS EC2)</td>
-<td align="right">Ant Media Server 1.2.6 Release(방송용 서버 구축)</td>
+<td align="">Ant Media Server 1.2.6 Release(방송용 서버 구축)</td>
 </tr>
  
  <tr>
- <th align="right">Database</th>
+ <th align="">Database</th>
 <td align="center">Firbase realtime database </td>
-<td align="right">mysql (AWS rds)</td>
+<td align="">mysql (AWS rds)</td>
 </tr>
 
  <tr>
- <th align="right">API</th>
+ <th align="">API</th>
 <td align="center">Google Map places API </td>
-<td align="right"></td>
+<td align=""></td>
 </tr>
 
 
