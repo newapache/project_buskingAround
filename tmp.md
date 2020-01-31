@@ -4,7 +4,7 @@
  
  공연 관람자는 관람자의 개별 선호에 맞는 버스킹 정보를 찾기가 어려우며, 오프라인으로만 공연을 접할 수 있습니다. 
  
- 이에 버스킹을 전문으로 하는 방송 SNS 개발을 통해 공연의 두 주체 간 소통창을 마련하고자 하였습니다. 
+ 이에 `버스킹을 전문으로 하는 방송 SNS` 개발을 통해 공연의 두 주체 간 소통창을 마련하고자 하였습니다. 
 
 
 ## 구현 화면 
@@ -15,14 +15,21 @@
   <img width="700" height="480" src="/images/view1.png">
 </p>
 
-![](/images/view1.png)
-![](/images/view2.png)
-![](/images/view3.png)
+<p align="center">
+  <img width="700" height="480" src="/images/view2.png">
+</p>
+
+<p align="center">
+  <img width="700" height="480" src="/images/view3.png">
+</p>
 
 
 ## 소개
 
-![](/images/flow.png)
+<p align="center">
+  <img width="700" height="480" src="/images/flow.png">
+</p>
+
 
 ## 사용된 기술
 
