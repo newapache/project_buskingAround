@@ -55,7 +55,7 @@
 
 
 
-## 기술 스택
+## 개발 환경 및 사용 기술 
 
 
 | Server-Side                | Database  | API | 
