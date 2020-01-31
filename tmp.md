@@ -55,12 +55,12 @@
 
 
 
-## 개발 환경 및 사용 기술 
+## 개발 환경 
 
 
-| Server-Side                | Database  | API | 
-| ---                 | ---    | ---        |
-| Ubuntu Server 16.04 LTS(AWS EC2)    | Firbase realtime database | Google Map places API      | 
+| Server-Side                | Database  | API | IDE
+| ---                 | ---    | ---        | ---
+| Ubuntu Server 16.04 LTS(AWS EC2)    | Firbase realtime database | Google Map places API      |  android studio(3.1.3)
 | Ant Media Server 1.2.6 Release(방송용 서버 구축) | mysql (AWS rds)  |       | 
              
 
