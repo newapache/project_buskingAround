@@ -9,6 +9,8 @@
 #1 [Heroku NodeJS 호스팅] : https://auto-timeline.herokuapp.com (Heroku 서버의 경우 1차접속 속도가 느릴수 있습니다)  
 #2 [개인 라즈베리파이 호스팅] : 작업중 -> Intel NUC 서버로
 
+![Kitten](/images/view1.png "A cute kitten")
+
 ## 소개
 
 수강신청 시 학우들의 편의를 위하여 수강 과목을 고르면 가능한 모든 시간표를 만들어주는 웹서비스 제작
