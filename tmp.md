@@ -1,16 +1,16 @@
 # GPS기반의 거리공연 어플리케이션 
 
  각 종  IT 기술이 발달한 시대 흐름 속에서도 여전히 거리 공연(이하 버스킹)은 그저 산발적으로 이루어지고 있습니다. 
+ 
+ 
  공연 관람자는 관람자의 개별 선호에 맞는 버스킹 정보를 찾기가 어려우며, 오프라인으로만 공연을 접할 수 있습니다. 
  
  이에 버스킹을 전문으로 하는 방송 SNS 개발을 통해 공연의 두 주체 간 소통창을 마련하고자 하였습니다. 
 
+
 ## 구현 화면 
 
-현재 이 웹서비스는 두가지 호스팅을 통하여 호스팅되고 있습니다.
 
-#1 [Heroku NodeJS 호스팅] : https://auto-timeline.herokuapp.com (Heroku 서버의 경우 1차접속 속도가 느릴수 있습니다)  
-#2 [개인 라즈베리파이 호스팅] : 작업중 -> Intel NUC 서버로
 
 ![](/images/view1.png)
 ![](/images/view2.png)
@@ -23,9 +23,9 @@
 
 ## 사용된 기술
 
-Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
-Database :  Firbase realtime database 
-API : Google Map API 
+- Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
+- Database :  Firbase realtime database 
+- API : Google Map API 
 
 ![](/images/system.png)
 
