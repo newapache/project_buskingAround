@@ -59,17 +59,21 @@
 
 
 <table>
-<thead>
-<tr>
-<th align="center">abc</th>
-<th align="right">defghi</th>
-</tr>
-</thead>
+ 
 <tbody>
 <tr>
+ <th align="center">abc</th>
 <td align="center">bar</td>
 <td align="right">baz</td>
-</tr></tbody></table>
+</tr>
+ 
+ <tr>
+ <th align="right">defghi</th>
+<td align="center">bar</td>
+<td align="right">baz</td>
+</tr>
+
+</tbody></table>
 
 
 - Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
