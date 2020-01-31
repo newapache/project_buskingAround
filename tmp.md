@@ -7,10 +7,10 @@
  
  이에 `버스킹을 전문으로 하는 방송 SNS` 개발을 통해 공연의 두 주체 간 소통창을 마련하고자 하였습니다. 
 
-#
 
 
-## [구현 화면] 
+
+## 구현 화면 
 <p align="center">
   <img width="700" height="480" src="/images/view2.png">
 </p>
@@ -51,11 +51,11 @@
 
 * 관심회원 검색 
 
-#
 
 
 
-## [기술 스택]
+
+## 기술 스택
 
 
 | Server-Side                | Database  | API | 
@@ -73,12 +73,14 @@
 
 
 ## 핵심 코드
+
 ### Client Side : [app.js](https://github.com/sangumee/Timeline-auto-generated-web-service/blob/master/public/javascripts/app.js)  
 과목 데이터를 받아서 사용자가 수강과목을 선택하고 과목 중복 처리, 시간표 중복 처리등을 처리
 ### Server Side : [index.js](https://github.com/sangumee/Timeline-auto-generated-web-service/blob/master/routes/index.js)  
 주로 페이지 라우팅 부분을 담당하며 각 페이지별로 DB쿼리를 활용하여 데이터 삽입 읽기 처리
 ### HTML Templates : [Views Folder](https://github.com/sangumee/Timeline-auto-generated-web-service/tree/master/views)  
 HTML 페이지로 데이터 뷰 처리
+
 
 
 
