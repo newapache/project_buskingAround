@@ -1,6 +1,6 @@
 # GPS기반의 거리공연 어플리케이션 
 
- 각 종  IT 기술이 발달한 시대 흐름 속에서도 여전히 거리 공연(이하 버스킹)은 그저 산발적으로 이루어지고 있습니다. 
+ 각 종  IT 기술이 발달한 시대 흐름 속에서도 여전히 `거리 공연(이하 버스킹)`은 그저 산발적으로 이루어지고 있습니다. 
  
  공연 관람자는 관람자의 개별 선호에 맞는 버스킹 정보를 찾기가 어려우며, 오프라인으로만 공연을 접할 수 있습니다. 
  
@@ -12,23 +12,35 @@
 
 
 <p align="center">
+  <img width="700" height="480" src="/images/view2.png">
+</p>
+
+* 로그인 
+
+* 현 위치 및 선호도 별 공연 추천  
+
+* 버스킹 지도 
+
+<p align="center">
   <img width="700" height="480" src="/images/view1.png">
 </p>
 
-<p align="center">
-  <img width="700" height="480" src="/images/view2.png">
-</p>
+
+* 마이페이지 
+
+* 공연 홍보글 등록 
+
+* 네트워킹 (팔로우 및 채팅) 
 
 <p align="center">
   <img width="700" height="480" src="/images/view3.png">
 </p>
 
+* 실시간 라이브 방송 및 채팅 
 
-## 소개
+* 지나간 방송 다시보기 
 
-<p align="center">
-  <img width="700" height="480" src="/images/flow.png">
-</p>
+* 관심회원 검색 
 
 
 ## 사용된 기술
@@ -38,6 +50,14 @@
 - API : Google Map API 
 
 ![](/images/system.png)
+
+
+## 기능 흐름도 
+
+<p align="center">
+  <img src="/images/flow.png">
+</p>
+
 
 
 ## 핵심 코드
