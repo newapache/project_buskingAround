@@ -60,42 +60,10 @@
 | Server-Side                | Database  | API | 
 | ---                 | ---    | ---        |
 | Ubuntu Server 16.04 LTS(AWS EC2)    | Firbase realtime database | Google Map places API      | 
-| Ant Media Server 1.2.6 Release(방송용 서버 구축) | mysql (AWS rds)  | 20.6%      | 
-| Signed Up           | 215    | 31.2%      | 
-| Entered Credit Card | 67     | 50.7%      | 
-| Received Submission | 34     |            |                      
+| Ant Media Server 1.2.6 Release(방송용 서버 구축) | mysql (AWS rds)  |       | 
+             
 
 
-
-
-<table>
- 
-<tbody align="center">
-<tr>
- <th align="center">Server-Side</th>
-<td align="center">Ubuntu Server 16.04 LTS(AWS EC2)</td>
-<td align="">Ant Media Server 1.2.6 Release(방송용 서버 구축)</td>
-</tr>
- 
- <tr>
- <th align="">Database</th>
-<td align="center">Firbase realtime database </td>
-<td align="">mysql (AWS rds)</td>
-</tr>
-
- <tr>
- <th align="">API</th>
-<td align="center">Google Map places API </td>
-<td align=""></td>
-</tr>
-
-
-</tbody></table>
-
-
-- Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
-- Database :  Firbase realtime database 
-- API : Google Map API 
 
 ![](/images/system.png)
 
