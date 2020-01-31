@@ -1,6 +1,9 @@
-# 시간표 자동 생성 웹서비스
-![](https://img.shields.io/badge/Code%20Statue-Open-brightgreen.svg)
-[![Build Status](https://travis-ci.com/sangumee/Timeline-auto-generated-web-service.svg?branch=master)](https://travis-ci.com/sangumee/Timeline-auto-generated-web-service)
+# GPS기반의 거리공연 어플리케이션 
+
+ 각 종  IT 기술이 발달한 시대 흐름 속에서도 여전히 거리 공연(이하 버스킹)은 그저 산발적으로 이루어지고 있습니다. 
+ 공연 관람자는 관람자의 개별 선호에 맞는 버스킹 정보를 찾기가 어려우며, 오프라인으로만 공연을 접할 수 있습니다. 
+ 
+ 이에 버스킹을 전문으로 하는 방송 SNS 개발을 통해 공연의 두 주체 간 소통창을 마련하고자 하였습니다. 
 
 ## 구현 화면 
 
@@ -9,17 +12,25 @@
 #1 [Heroku NodeJS 호스팅] : https://auto-timeline.herokuapp.com (Heroku 서버의 경우 1차접속 속도가 느릴수 있습니다)  
 #2 [개인 라즈베리파이 호스팅] : 작업중 -> Intel NUC 서버로
 
-![Kitten](/images/view1.png "A cute kitten")
+![](/images/view1.png)
+![](/images/view2.png)
+![](/images/view3.png)
+
 
 ## 소개
 
-수강신청 시 학우들의 편의를 위하여 수강 과목을 고르면 가능한 모든 시간표를 만들어주는 웹서비스 제작
+
 
 ## 사용된 기술
 
-Server-Side : NodeJS 10.14.1, Express Framework & Pug HTML Tempalate  
-Database : MariaDB 10.1.23 (라즈베리파이에서 호스팅 중)  
-Library : Bootstrap, jQuery, DataTables(Admin 테이블만)  
+Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
+Database :  Firbase realtime database 
+API : Google Map API 
+
+![](/images/system.png)
+
+
+
 
 ## 핵심 코드
 
@@ -29,6 +40,7 @@ Library : Bootstrap, jQuery, DataTables(Admin 테이블만)
 주로 페이지 라우팅 부분을 담당하며 각 페이지별로 DB쿼리를 활용하여 데이터 삽입 읽기 처리
 ### HTML Templates : [Views Folder](https://github.com/sangumee/Timeline-auto-generated-web-service/tree/master/views)  
 HTML 페이지로 데이터 뷰 처리
+
 
 ## 프로젝트 흐름도
 <img src="https://i.imgur.com/tLwHtAJ.png" />
