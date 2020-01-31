@@ -57,10 +57,19 @@
 ## [기술 스택]
 
 
-| -------- | ----- | ----- |  
-|  Salami |  8.99 | 10.99 |  
-|  Hawaii |  9.49 | 11.49 |  
-|  Marge. |  7.99 |  9.99 |  
+
+<table>
+<thead>
+<tr>
+<th align="center">abc</th>
+<th align="right">defghi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">bar</td>
+<td align="right">baz</td>
+</tr></tbody></table>
 
 
 - Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
