@@ -57,6 +57,16 @@
 ## [기술 스택]
 
 
+| Step                | Users  | Conversion | 
+| ---                 | ---    | ---        |
+| Viewed Home Page    | 13,129 | 7.9%       | 
+| Viewed Sign Up Page | 1,044  | 20.6%      | 
+| Signed Up           | 215    | 31.2%      | 
+| Entered Credit Card | 67     | 50.7%      | 
+| Received Submission | 34     |            |                      
+
+
+
 
 <table>
  
