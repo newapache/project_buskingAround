@@ -76,11 +76,13 @@
 
 ### 실시간 방송 및 채팅 : [LiveVideoBroadcasterActivity.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/io/antmedia/android/liveVideoBroadcaster/LiveVideoBroadcasterActivity.java)  
 
- 1대 N 방송 기능으로,  공연자는 자신의 개인 페이지에서 ‘방송하기' 버튼을 통해 방송을 시작할 수 있습니다. 
+ - 1대 N 방송 기능으로,  공연자는 자신의 개인 페이지에서 ‘방송하기' 버튼을 통해 방송을 시작할 수 있습니다. 
+ 
  방송의 다중 채팅 기능을 통해 온라인 관객과의 소통도 가능합니다.    
 
- aws의 ubuntu 환경에 방송 기능을 제공하는 AntMedia 서버를 구축하여 클라이언트와 통신하였습니다. 
- 공연자 별로 고유한 firebase 채팅 테이블을 만들어, 방송시 채팅방이 함께 동작하도록 구현하였습니다. 
+ - aws의 ubuntu 환경에 방송 기능을 제공하는 AntMedia 서버를 구축하여 클라이언트와 통신하였습니다. 
+ 
+ 공연자 별 고유의 firebase chat 테이블을 생성하여, n명의 관객이 방송 입장 후 채팅방에서 대화할 수 있도록 구현하였습니다. 
    
 
 
