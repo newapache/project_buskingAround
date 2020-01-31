@@ -57,10 +57,10 @@
 ## [기술 스택]
 
 
-| Step                | Users  | Conversion | 
+| Server-Side                | Database  | API | 
 | ---                 | ---    | ---        |
-| Viewed Home Page    | 13,129 | 7.9%       | 
-| Viewed Sign Up Page | 1,044  | 20.6%      | 
+| Ubuntu Server 16.04 LTS(AWS EC2)    | Firbase realtime database | Google Map places API      | 
+| Ant Media Server 1.2.6 Release(방송용 서버 구축) | mysql (AWS rds)  | 20.6%      | 
 | Signed Up           | 215    | 31.2%      | 
 | Entered Credit Card | 67     | 50.7%      | 
 | Received Submission | 34     |            |                      
