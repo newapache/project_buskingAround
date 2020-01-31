@@ -12,7 +12,7 @@
 
 
 <p align="center">
-  <img width="600" height="400" src="/images/view1.png">
+  <img width="700" height="480" src="/images/view1.png">
 </p>
 
 ![](/images/view1.png)
