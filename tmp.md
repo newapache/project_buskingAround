@@ -48,22 +48,13 @@
 
 
 
-## [사용된 기술]
+## [기술 스택]
 
 - Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
 - Database :  Firbase realtime database 
 - API : Google Map API 
 
 ![](/images/system.png)
-
-
-
-
-## [기능 흐름도] 
-
-<p align="center">
-  <img src="/images/flow.png">
-</p>
 
 
 
