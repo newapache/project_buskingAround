@@ -9,7 +9,7 @@
 #
 
 
-## [구현 화면] 
+## 구현 화면
 <p align="center">
   <img width="700" height="480" src="/images/view2.png">
 </p>
