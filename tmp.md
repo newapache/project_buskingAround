@@ -2,7 +2,6 @@
 
  각 종  IT 기술이 발달한 시대 흐름 속에서도 여전히 거리 공연(이하 버스킹)은 그저 산발적으로 이루어지고 있습니다. 
  
- 
  공연 관람자는 관람자의 개별 선호에 맞는 버스킹 정보를 찾기가 어려우며, 오프라인으로만 공연을 접할 수 있습니다. 
  
  이에 버스킹을 전문으로 하는 방송 SNS 개발을 통해 공연의 두 주체 간 소통창을 마련하고자 하였습니다. 
@@ -19,7 +18,7 @@
 
 ## 소개
 
-
+![](/images/flow.png)
 
 ## 사용된 기술
 
@@ -30,9 +29,8 @@
 ![](/images/system.png)
 
 
-
-
 ## 핵심 코드
+
 
 ### Client Side : [app.js](https://github.com/sangumee/Timeline-auto-generated-web-service/blob/master/public/javascripts/app.js)  
 과목 데이터를 받아서 사용자가 수강과목을 선택하고 과목 중복 처리, 시간표 중복 처리등을 처리
