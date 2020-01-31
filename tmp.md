@@ -1,8 +1,5 @@
 # GPS기반의 거리공연 어플리케이션 
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
 
  각 종  IT 기술이 발달한 시대 흐름 속에서도 여전히 `거리 공연(이하 버스킹)`은 그저 산발적으로 이루어지고 있습니다. 
  
