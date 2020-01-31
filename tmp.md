@@ -7,7 +7,7 @@
  이에 `버스킹을 전문으로 하는 방송 SNS` 개발을 통해 공연의 두 주체 간 소통창을 마련하고자 하였습니다. 
 
 
-## 구현 화면 
+## [구현 화면] 
 
 
 
@@ -21,6 +21,8 @@
 
 * 버스킹 지도 
 
+
+
 <p align="center">
   <img width="700" height="480" src="/images/view1.png">
 </p>
@@ -31,6 +33,8 @@
 * 공연 홍보글 등록 
 
 * 네트워킹 (팔로우 및 채팅) 
+
+
 
 <p align="center">
   <img width="700" height="480" src="/images/view3.png">
@@ -43,7 +47,8 @@
 * 관심회원 검색 
 
 
-## 사용된 기술
+
+## [사용된 기술]
 
 - Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
 - Database :  Firbase realtime database 
@@ -52,7 +57,9 @@
 ![](/images/system.png)
 
 
-## 기능 흐름도 
+
+
+## [기능 흐름도] 
 
 <p align="center">
   <img src="/images/flow.png">
@@ -69,6 +76,8 @@
 주로 페이지 라우팅 부분을 담당하며 각 페이지별로 DB쿼리를 활용하여 데이터 삽입 읽기 처리
 ### HTML Templates : [Views Folder](https://github.com/sangumee/Timeline-auto-generated-web-service/tree/master/views)  
 HTML 페이지로 데이터 뷰 처리
+
+
 
 
 ## 프로젝트 흐름도
