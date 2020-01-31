@@ -10,9 +10,6 @@
 
 
 ## [구현 화면] 
-
-
-
 <p align="center">
   <img width="700" height="480" src="/images/view2.png">
 </p>
@@ -58,7 +55,6 @@
 
 
 ## [기술 스택]
-
 - Server-Side : Ubuntu Server 16.04 LTS(AWS EC2),  Ant Media Server 1.2.6 Release(방송용 서버 구축)
 - Database :  Firbase realtime database 
 - API : Google Map API 
@@ -70,8 +66,6 @@
 
 
 ## 핵심 코드
-
-
 ### Client Side : [app.js](https://github.com/sangumee/Timeline-auto-generated-web-service/blob/master/public/javascripts/app.js)  
 과목 데이터를 받아서 사용자가 수강과목을 선택하고 과목 중복 처리, 시간표 중복 처리등을 처리
 ### Server Side : [index.js](https://github.com/sangumee/Timeline-auto-generated-web-service/blob/master/routes/index.js)  
