@@ -88,7 +88,7 @@
 
 ## 핵심 기능 
 
-### 실시간 방송 및 채팅 : [LiveVideoBroadcasterActivity.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/io/antmedia/android/liveVideoBroadcaster/LiveVideoBroadcasterActivity.java)  
+> 실시간 방송 및 채팅 : [LiveVideoBroadcasterActivity.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/io/antmedia/android/liveVideoBroadcaster/LiveVideoBroadcasterActivity.java)  
 
  - 1대 N 방송 기능으로,  공연자는 자신의 개인 페이지에서 ‘방송하기' 버튼을 통해 방송을 시작할 수 있습니다. 
  
@@ -103,7 +103,7 @@
 #
 
 
-### 버스킹 지도  : [MainActivity.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Main/MainActivity.java)  |  [BuskingMap.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Map/BuskingMap.java)  
+> 버스킹 지도  : [MainActivity.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Main/MainActivity.java)  |  [BuskingMap.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Map/BuskingMap.java)  
 
 
 - 현재 자신의 위치 또는 원하는 장소의 공연 정보를 확인 할 수 있으며, 검색 위치에 맵마커를 기록할 수 있습니다. 
