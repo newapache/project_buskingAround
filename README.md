@@ -1,15 +1,11 @@
-# 프로젝트명
-> 간략한 프로젝트 소개 문구를 작성합니다.
+
+
+# GPS기반의 거리공연 어플리케이션 
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url]
 
-한 두 문단으로 프로젝트 소개 글을 작성합니다.
-
-![](../header.png)
-
-# GPS기반의 거리공연 어플리케이션 
 
 <p align="center">
   <img width="350" src="/images/busk.png">
