@@ -92,7 +92,7 @@
 ### 버스킹 지도  : [MainActivity.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Main/MainActivity.java)  / [BuskingMap.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Map/BuskingMap.java)  
 
 
-- 현재 자신의 위치 또는 원하는 장소의 공연 홍보 글을 확인 할 수 있으며, 검색한 위치에 맵 마커를 기록할 수 있습니다. 
+- 현재 자신의 위치 또는 원하는 장소의 공연 정보를 확인 할 수 있으며, 검색 위치에 맵마커를 기록할 수 있습니다. 
 
 -  Google map places api를 이용해 장소에 대한 세부 정보를 제공 받을 수 있습니다. 공연자는 자신의 공연 예정 장소에 마커를 찍어 홍보글을 함께 올릴 수 있습니다.
 
