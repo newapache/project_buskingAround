@@ -60,8 +60,8 @@
 
 | Server-Side                | Database  | API | IDE
 | ---                 | ---    | ---        | ---
-| Ubuntu Server 16.04 LTS(AWS EC2)    | Firbase realtime database | Google Map places API      |  android studio(3.1.3)
-| Ant Media Server 1.2.6 Release(방송용 서버 구축) | mysql (AWS rds)  |       | 
+| Ubuntu Server 16.04 LTS(AWS EC2)    | Firbase realtime database | Google Map places API      |  Android studio 3.1.3
+| Ant Media Server 1.2.6 Release(방송용 서버 구축) | Mysql (AWS rds)  |       | 
              
 
 
@@ -89,7 +89,7 @@
 #
 
 
-### 버스킹 지도  : [MainActivity.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Main/MainActivity.java)  / [BuskingMap.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Map/BuskingMap.java)  
+### 버스킹 지도  : [MainActivity.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Main/MainActivity.java)  |  [BuskingMap.java](https://github.com/newapache/project_buskingAround/blob/master/app/src/main/java/finalreport/mobile/dduwcom/myapplication/Map/BuskingMap.java)  
 
 
 - 현재 자신의 위치 또는 원하는 장소의 공연 정보를 확인 할 수 있으며, 검색 위치에 맵마커를 기록할 수 있습니다. 
